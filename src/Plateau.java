@@ -16,7 +16,14 @@ public abstract class Plateau {
         this.noir = jn;
     }
 
-    public abstract boolean isEmpty();
+    public boolean isEmpty() {
+        for (int i = 0; i < cases.length; i++) {
+            for (Case c : cases[i]) {
+                if (!c.isEmpty()) return false;
+            }
+        }
+        return true;
+    }
 
     public void afficher() {
         int cmp = 0;               //affiche le plateau
@@ -34,6 +41,15 @@ public abstract class Plateau {
             }
             System.out.println();
         }
+    }
+
+    public boolean isFull() {
+        for (int i = 0; i < cases.length; i++) {
+            for (Case c : cases[i]) {
+                if (c.isEmpty()) return false;
+            }
+        }
+        return true;
     }
 
 }

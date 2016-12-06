@@ -19,25 +19,7 @@ public class PlateauColorLines extends Plateau{
         }
     }
 
-    public boolean isEmpty() {
-        for (int i = 0; i < cases.length; i++) {
-            for (Case c : cases[i]) {
-                if (!c.isEmpty()) return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean isFull() {
-        for (int i = 0; i < cases.length; i++) {
-            for (Case c : cases[i]) {
-                if (c.isEmpty()) return false;
-            }
-        }
-        return true;
-    }
-
-
+    public void deplacementDuPion(){}
 
 
     public void putThreeColors(){

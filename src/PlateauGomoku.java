@@ -32,23 +32,9 @@ public class PlateauGomoku extends Plateau {
     //Factorisation du code les deux boucles for dans un constructeur c'est pas hyper propre.
 
 
-    public boolean isEmpty() {
-        for (int i = 0; i < cases.length; i++) {
-            for (Case c : cases[i]) {
-                if (!c.isEmpty()) return false;
-            }
-        }
-        return true;
-    }
 
-    public boolean isFull() {
-        for (int i = 0; i < cases.length; i++) {
-            for (Case c : cases[i]) {
-                if (c.isEmpty()) return false;
-            }
-        }
-        return true;
-    }
+
+
 
     public void setCase(CaseGomoku c) {  // peut etre a mettre dans case
         for (int i = 0; i < cases.length; i++) {
