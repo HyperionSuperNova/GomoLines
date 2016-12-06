@@ -17,6 +17,7 @@ public abstract class Case {
         this.pion = p;
     }
 
+
     public boolean isEmpty(){
         return (pion == null);
     }
@@ -24,4 +25,5 @@ public abstract class Case {
     public abstract void afficher();
     public abstract int getX();
     public abstract int getY();
+    public abstract void setPion(String s);
 }

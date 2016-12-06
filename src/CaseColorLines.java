@@ -36,8 +36,8 @@ public class CaseColorLines extends Case {
         return y;
     }
 
-    public void setPion(Pion a){
-        this.pion = a;
+    public void setPion(String s){
+        this.pion = new PionColorLines(s);
     }
 
 }

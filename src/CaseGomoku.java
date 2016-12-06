@@ -24,7 +24,7 @@ public class CaseGomoku extends Case{
         return y;
     }
 
-    public void setPionGomoku(String s){
+    public void setPion(String s){
         this.pion = new PionGomoku(s);
     }
 

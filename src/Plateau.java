@@ -49,6 +49,11 @@ public abstract class Plateau {
         return true;
     }
 
+
+    public boolean isValid(Case c) {
+        return c.isEmpty();
+    }
+
     public int getLongueur(){return this.longueur;}
     public int getLargeur(){return this.largeur;}
     protected abstract void faire(int a, int b, boolean c);

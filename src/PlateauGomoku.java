@@ -41,13 +41,6 @@ public class PlateauGomoku extends Plateau {
         this.afficherScore();
     }
 
-     /*
-
-
-
-        }
-    */
-
     protected void initializeThePlate() {
         for (int i = 0; i < cases.length; i++) {
             for (int j = 0; j < cases[i].length; j++) {
@@ -177,11 +170,6 @@ public class PlateauGomoku extends Plateau {
 
     }
 
-    public boolean isValid(Case c) {
-        return c.isEmpty();
-
-    }
-
     public void faire(int x, int y, boolean joueur) {
         Scanner sc = new Scanner(System.in);
         if (x >= 0 && x <= cases.length && y >= 0 && y < cases.length) {
@@ -190,12 +178,10 @@ public class PlateauGomoku extends Plateau {
                     if (x == i && y == j) {
                         if (isValid(cases[i][j])) {
                             if (joueur) {
-                                ((CaseGomoku)cases[i][j]).setPionGomoku("blanc");
-                                //blanc.setPions();
+                                cases[i][j].setPion("blanc");
                                 if (alignement(cases[i][j])) blanc.setScore(1);
                             } else {
-                                ((CaseGomoku)cases[i][j]).setPionGomoku("noir");
-                                //noir.setPions();
+                                cases[i][j].setPion("noir");
                                 if (alignement(cases[i][j])) noir.setScore(1);
                             }
                         } else {

@@ -1,7 +1,13 @@
 /**
  * Created by stryker on 06/12/16.
  */
-public class Joueur1ColorLines extends Joueur{
+public class JoueurColorLines extends Joueur{
+
+    public JoueurColorLines(String pseudo) {
+        this.pseudo = pseudo;
+        this.score = 0;
+    }
+
     @Override
     public void setScore(int n) {
 
