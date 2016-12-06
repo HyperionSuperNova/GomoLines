@@ -61,12 +61,11 @@ public class PlateauGomoku extends Plateau {
     public int[] robot(){
         int a = (int)(Math.random()*this.getLongueur());
         int b = (int)(Math.random()*this.getLargeur());
-        System.out.println("Coup " + this.noir.getPseudo() + ": "+b+","+a);
         while(!this.getCases()[a][b].isEmpty()){
             a = (int)(Math.random()*this.getLongueur());
             b = (int)(Math.random()*this.getLongueur());
-            System.out.println("Coup " + this.noir.getPseudo() + ": "+b+","+a);
         }
+        System.out.println("Coup " + this.noir.getPseudo() + ": "+b+","+a);
         return new int[]{a,b};
     }
 
@@ -98,7 +97,6 @@ public class PlateauGomoku extends Plateau {
             if(curseur.pion == null || !(curseur.pion.toString().equals(c.pion.toString()))) cmp = 0;
             if(!curseur.isEmpty() && c.pion.toString().equals(curseur.pion.toString())) cmp ++;
             if(cmp >= 5) return true;
-            System.out.println(cmp+ " "+b);
             j++;
         }
         return (cmp >= 5 && b);

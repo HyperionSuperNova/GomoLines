@@ -17,6 +17,8 @@ public abstract class Case {
         this.pion = p;
     }
 
+    public Pion getPion(){return pion;}
+
     public boolean isEmpty(){
         return (pion == null);
     }
