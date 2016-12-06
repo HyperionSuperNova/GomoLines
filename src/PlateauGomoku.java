@@ -149,11 +149,11 @@ public class PlateauGomoku extends Plateau {
                     if (x == i && y == j) {
                         if (isValid(cases[i][j])) {
                             if (joueur) {
-                                ((CaseGomoku)cases[i][j]).setPionGomoku(true);
+                                ((CaseGomoku)cases[i][j]).setPionGomoku("blanc");
                                 //blanc.setPions();
                                 if (alignement(cases[i][j])) blanc.setScore(1);
                             } else {
-                                ((CaseGomoku)cases[i][j]).setPionGomoku(false);
+                                ((CaseGomoku)cases[i][j]).setPionGomoku("noir");
                                 //noir.setPions();
                                 if (alignement(cases[i][j])) noir.setScore(1);
                             }

@@ -14,7 +14,7 @@ public class Joueur2Gomoku extends Joueur {
 
     private void addPawns(int n){
         while(pawns.size() < n){
-            pawns.add(new PionGomoku(false));
+            pawns.add(new PionGomoku("noir"));
         }
     }
 

@@ -3,6 +3,7 @@
  */
 public abstract class Pion {
 
-    public abstract void afficher();
 
+    public abstract void afficher();
+    public abstract String toString();
 }

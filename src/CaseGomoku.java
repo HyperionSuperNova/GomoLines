@@ -24,8 +24,8 @@ public class CaseGomoku extends Case{
         return y;
     }
 
-    public void setPionGomoku(boolean b){
-        this.pion = new PionGomoku(b);
+    public void setPionGomoku(String s){
+        this.pion = new PionGomoku(s);
     }
 
 
@@ -35,6 +35,6 @@ public class CaseGomoku extends Case{
     }
 
     public boolean isItEquals(Pion a){
-        return ((PionGomoku)pion).whichColor() == ((PionGomoku)a).whichColor();
+        return pion.toString().equals(pion.toString());
     }
 }

@@ -1,19 +1,31 @@
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 /**
  * Created by Stryker on 04/12/16.
  */
 public class PionGomoku extends Pion{
-    private boolean blancNoir;          // TRUE pour blanc, FALSE pour noir
+    Couleur cool;          // TRUE pour blanc, FALSE pour noir
 
-    public PionGomoku(boolean blancNoir){
-        this.blancNoir = blancNoir;
+    public PionGomoku(String s){
+        switch(s){
+            case "noir":
+                cool = Couleur.NOIR;
+            case "blanc":
+                cool = Couleur.BLANC;
+        }
     }
 
+    enum Couleur{BLANC, NOIR;}
+
     public void afficher(){
-        if(blancNoir) System.out.print("B"+" ");
+        if(this.toString().equals("BLANC")) System.out.print("B"+" ");
         else System.out.print("N"+" ");
     }
 
-    public boolean whichColor(){
-        return blancNoir;
+    public String toString(){
+        return this.cool.name();
     }
 }
