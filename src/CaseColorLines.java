@@ -11,10 +11,6 @@ public class CaseColorLines extends Case {
         super(x,y,pcl);
     }
 
-    @Override
-    public boolean isEmpty() {
-        return pion == null;
-    }
 
     @Override
     public boolean isItEquals(Pion a) {

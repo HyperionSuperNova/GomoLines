@@ -36,15 +36,4 @@ public class PionColorLines extends Pion{
     public String toString(){
         return this.couleur.name();
     }
-
-
-    public static void main (String[] args){
-        PionColorLines a = new PionColorLines();
-        a.afficher();
-        PionColorLines b = new PionColorLines();
-        b.afficher();
-        PionColorLines c = new PionColorLines();
-        c.afficher();
-    }
-
 }

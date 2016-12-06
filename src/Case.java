@@ -17,7 +17,9 @@ public abstract class Case {
         this.pion = p;
     }
 
-    public abstract boolean isEmpty();
+    public boolean isEmpty(){
+        return (pion == null);
+    }
     public abstract boolean isItEquals(Pion a);
     public abstract void afficher();
     public abstract int getX();

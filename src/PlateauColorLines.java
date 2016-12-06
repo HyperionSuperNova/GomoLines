@@ -32,14 +32,16 @@ public class PlateauColorLines extends Plateau{
                 b = new Random().nextInt(largeur);
             }
             ((CaseColorLines)cases[a][b]).setPion(new PionColorLines());
-            this.afficher();
             cmp++;
         }
     }
 
-    public static void main (String[] args){
-        Plateau a = new PlateauColorLines(5,5,null,null);
-        a.afficher();
-        ((PlateauColorLines)a).putThreeColors();
+    public static void main (String[] args) {
+        Plateau a = new PlateauColorLines(5, 5, null, null);
+        while (!a.isFull()) {
+            a.afficher();
+            ((PlateauColorLines) a).putThreeColors();
+
+        }
     }
 }

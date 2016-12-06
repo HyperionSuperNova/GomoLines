@@ -28,9 +28,6 @@ public class CaseGomoku extends Case{
         this.pion = new PionGomoku(b);
     }
 
-    public boolean isEmpty(){
-        return (pion == null);
-    }
 
     public void afficher(){
         if(!isEmpty()) pion.afficher();

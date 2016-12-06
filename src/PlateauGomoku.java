@@ -48,24 +48,6 @@ public class PlateauGomoku extends Plateau {
         return (CaseGomoku[][]) cases;
     }
 
-    /*public void afficher() {
-        int cmp = 0;               //affiche le plateau
-        System.out.print("  X ");
-        for (int i = 0; i < cases.length; i++) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
-        System.out.println("Y");
-        for (int i = 0; i < cases.length; i++) {
-            System.out.print(cmp + "   ");
-            cmp++;
-            for (int j = 0; j < cases[i].length; j++) {
-                cases[i][j].afficher();
-            }
-            System.out.println();
-        }
-    }*/
-
     public boolean alignementVertical(Case c) {          //verifie alignement vertical
         int cmp = 1;
         for (int j = c.getY() + 1; j < cases[c.getX()].length; j++) {
