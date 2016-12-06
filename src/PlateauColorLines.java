@@ -4,19 +4,24 @@ import java.util.Random;
  * Created by Stryker on 04/12/2016.
  */
 public class PlateauColorLines extends Plateau{
-
-    public PlateauColorLines(int longueur, int largeur, Joueur1Gomoku jb, Joueur2Gomoku jn) {
-        super(longueur, largeur, jb, jn);
-        cases = new CaseColorLines[longueur][largeur];
-        initializeThePlate();
+    protected Joueur j1;
+    public PlateauColorLines(int dimension, Joueur1ColorLines j1) {
+        super(dimension);
+        cases = new CaseColorLines[dimension][dimension];
+        this.j1 = j1;
     }
 
-    private void initializeThePlate() {
+    protected void initializeThePlate() {
         for (int i = 0; i < cases.length; i++) {
             for (int j = 0; j < cases[i].length; j++) {
                 this.cases[i][j] = new CaseColorLines(i, j);
             }
         }
+    }
+
+    @Override
+    public int[] robot() {
+        return new int[0];
     }
 
     public void deplacementDuPion(){}
@@ -36,8 +41,32 @@ public class PlateauColorLines extends Plateau{
         }
     }
 
+    public PlateauColorLines(int dimension) {
+        super(dimension);
+    }
+
+    @Override
+    protected void faire(int a, int b, boolean c) {
+
+    }
+
+    @Override
+    public void afficherScore() {
+
+    }
+
+    @Override
+    public Case[][] getCases() {
+        return this.cases;
+    }
+
+    @Override
+    public void jouer(String s) {
+
+    }
+
     public static void main (String[] args) {
-        Plateau a = new PlateauColorLines(5, 5, null, null);
+        Plateau a = new PlateauColorLines(5, new Joueur1ColorLines());
         while (!a.isFull()) {
             a.afficher();
             ((PlateauColorLines) a).putThreeColors();

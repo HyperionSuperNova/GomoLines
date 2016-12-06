@@ -5,15 +5,12 @@ public abstract class Plateau {
     protected int longueur;
     protected int largeur;
     protected Case[][] cases;
-    protected Joueur blanc;
-    protected Joueur noir;
 
     //Retrait d'élément superflue mettre this.blanc = blanc pour après le déclarer new ne sert à rien
-    public Plateau(int longueur, int largeur, Joueur1Gomoku jb, Joueur2Gomoku jn) {
-        this.longueur = longueur;
-        this.largeur = largeur;
-        this.blanc = jb;
-        this.noir = jn;
+    public Plateau(int dimension) {
+        this.longueur = dimension;
+        this.largeur = dimension;
+        //initializeThePlate();
     }
 
     public boolean isEmpty() {
@@ -51,5 +48,14 @@ public abstract class Plateau {
         }
         return true;
     }
+
+    public int getLongueur(){return this.longueur;}
+    public int getLargeur(){return this.largeur;}
+    protected abstract void faire(int a, int b, boolean c);
+    public abstract void afficherScore();
+    protected abstract void initializeThePlate();
+    public abstract Case[][] getCases();
+    public abstract void jouer(String s);
+    public abstract int[] robot();
 
 }

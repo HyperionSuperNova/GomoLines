@@ -4,24 +4,50 @@ import java.util.Scanner;
  * Created by merat on 17/11/16.
  */
 public class PlateauGomoku extends Plateau {
+    protected Joueur blanc;
+    protected Joueur noir;
 
-
-    public PlateauGomoku(int longueur, int largeur, Joueur1Gomoku j1, Joueur2Gomoku j2) {
-        super(longueur, largeur,j1,j2);
-        cases = new CaseGomoku[longueur][largeur];
-        initializeThePlate();
+    public PlateauGomoku(int dimension, JoueurGomoku j1, JoueurGomoku j2) {
+        super(dimension);
+        cases = new CaseGomoku[dimension][dimension];
+        this.blanc = j1;
+        this.noir = j2;
     }
 
-    public int getLongueur() {
-        return longueur;
+    @Override
+    public void jouer(String s) {
+        switch (s) {
+            case "robot":
+                while (!this.isFull()) {
+                    String[] t1 = this.blanc.jouer();
+                    this.faire(Integer.parseInt(t1[1]), Integer.parseInt(t1[0]), true);
+                    this.faire(robot()[0], robot()[1], false);
+                    this.afficher();
+                }
+                break;
+            case "humain":
+                this.afficher();
+                while (!this.isFull()) {
+                    String[] t1 = this.blanc.jouer();
+                    this.faire(Integer.parseInt(t1[1]), Integer.parseInt(t1[0]), true);
+                    this.afficher();
+                    String[] t2 = this.noir.jouer();
+                    this.faire(Integer.parseInt(t2[1]), Integer.parseInt(t2[0]), false);
+                    this.afficher();
+                }
+                break;
+        }
+        this.afficherScore();
     }
 
-    public int getLargeur() {
-        return largeur;
-    }
+     /*
 
 
-    private void initializeThePlate() {
+
+        }
+    */
+
+    protected void initializeThePlate() {
         for (int i = 0; i < cases.length; i++) {
             for (int j = 0; j < cases[i].length; j++) {
                 this.cases[i][j] = new CaseGomoku(i, j);
@@ -31,7 +57,17 @@ public class PlateauGomoku extends Plateau {
 
     //Factorisation du code les deux boucles for dans un constructeur c'est pas hyper propre.
 
-
+    public int[] robot(){
+        int a = (int)(Math.random()*this.getLongueur());
+        int b = (int)(Math.random()*this.getLargeur());
+        System.out.println("Coup " + this.noir.getPseudo() + ": "+b+","+a);
+        while(!this.getCases()[a][b].isEmpty()){
+            a = (int)(Math.random()*this.getLongueur());
+            b = (int)(Math.random()*this.getLongueur());
+            System.out.println("Coup " + this.noir.getPseudo() + ": "+b+","+a);
+        }
+        return new int[]{a,b};
+    }
 
 
 

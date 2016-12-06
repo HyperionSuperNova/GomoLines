@@ -12,9 +12,9 @@ public class PionGomoku extends Pion{
     public PionGomoku(String s){
         switch(s){
             case "noir":
-                cool = Couleur.NOIR;
+                cool = Couleur.NOIR;break;
             case "blanc":
-                cool = Couleur.BLANC;
+                cool = Couleur.BLANC;break;
         }
     }
 
