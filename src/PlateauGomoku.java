@@ -21,7 +21,8 @@ public class PlateauGomoku extends Plateau {
                 while (!this.isFull()) {
                     String[] t1 = this.blanc.jouer();
                     this.faire(Integer.parseInt(t1[1]), Integer.parseInt(t1[0]), true);
-                    this.faire(robot()[0], robot()[1], false);
+                    int [] rob = this.robot();
+                    this.faire(rob[0], rob[1], false);
                     this.afficher();
                 }
                 break;
@@ -94,8 +95,8 @@ public class PlateauGomoku extends Plateau {
         while(j < cases[x].length){
             curseur = cases[x][j];
             if(curseur.getX() == c.getX() && curseur.getY() == c.getY()) b = true;
-            if(curseur.getPion() == null || !(curseur.getPion().toString().equals(c.getPion().toString()))) cmp = 0;
-            if(!curseur.isEmpty() && c.getPion().toString().equals(curseur.getPion().toString())) cmp ++;
+            if(curseur.pion == null || !(curseur.pion.toString().equals(c.pion.toString()))) cmp = 0;
+            if(!curseur.isEmpty() && c.pion.toString().equals(curseur.pion.toString())) cmp ++;
             if(cmp >= 5) return true;
             System.out.println(cmp+ " "+b);
             j++;
@@ -113,8 +114,8 @@ public class PlateauGomoku extends Plateau {
         while(i < cases[x].length){
             curseur = cases[i][y];
             if(curseur.getX() == c.getX() && curseur.getY() == c.getY()) b = true;
-            if(curseur.getPion() == null || !(curseur.getPion().toString().equals(c.getPion().toString()))) cmp = 0;
-            if(!curseur.isEmpty() && c.getPion().toString().equals(curseur.getPion().toString())) cmp ++;
+            if(curseur.pion == null || !(curseur.pion.toString().equals(c.pion.toString()))) cmp = 0;
+            if(!curseur.isEmpty() && c.pion.toString().equals(curseur.pion.toString())) cmp ++;
             if(cmp >= 5) return true;
             i++;
         }
@@ -137,8 +138,8 @@ public class PlateauGomoku extends Plateau {
         while( i < cases.length && j < cases.length){
             curseur = cases[i][j];
             if(curseur.getX() == c.getX() && curseur.getY() == c.getY()) b = true;
-            if(curseur.getPion() == null || !(curseur.getPion().toString().equals(c.getPion().toString()))) cmp = 0;
-            if(!curseur.isEmpty() && c.getPion().toString().equals(curseur.getPion().toString())) cmp ++;
+            if(curseur.pion == null || !(curseur.pion.toString().equals(c.pion.toString()))) cmp = 0;
+            if(!curseur.isEmpty() && c.pion.toString().equals(curseur.pion.toString())) cmp ++;
             if(cmp >= 5) return true;
             i++;
             j++;
@@ -162,8 +163,8 @@ public class PlateauGomoku extends Plateau {
         while( i >= 0 && j < cases.length){
             curseur = cases[i][j];
             if(curseur.getX() == c.getX() && curseur.getY() == c.getY()) b = true;
-            if(curseur.getPion() == null || !(curseur.getPion().toString().equals(c.getPion().toString()))) cmp = 0;
-            if(!curseur.isEmpty() && c.getPion().toString().equals(curseur.getPion().toString())) cmp ++;
+            if(curseur.pion == null || !(curseur.pion.toString().equals(c.pion.toString()))) cmp = 0;
+            if(!curseur.isEmpty() && c.pion.toString().equals(curseur.pion.toString())) cmp ++;
             if(cmp >= 5) return true;
             i--;
             j++;
