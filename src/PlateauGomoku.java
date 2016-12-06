@@ -84,91 +84,95 @@ public class PlateauGomoku extends Plateau {
         return (CaseGomoku[][]) cases;
     }
 
-    public boolean alignementVertical(Case c) {          //verifie alignement vertical
-        int cmp = 1;
-        for (int j = c.getY() + 1; j < cases[c.getX()].length; j++) {
-            if (!cases[c.getX()][j].isEmpty() && cases[c.getX()][j].isItEquals(c.pion)) {
-                cmp++;
-            } else if (cmp < 5) return false;
-            else return true;
-        }
-        return (cmp == 5);
-    }
-
     public boolean alignementHorizontal(Case c) {          //verifie alignement horizontal
-        int cmp = 1;
-        for (int i = c.getX() + 1; i < cases.length; i++) {
-            if (!cases[i][c.getY()].isEmpty() && cases[i][c.getY()].isItEquals(c.pion)) {
-                cmp++;
-            } else if (cmp < 5) return false;
-            else return true;
-        }
-        return (cmp == 5);
-    }
-
-    public boolean alignementDiagonalAvantDroite(Case c) {           //verifie alignement Avant droite
-        int cmp = 1;
+        int cmp =0;
+        boolean b = false;
         int x = c.getX();
         int y = c.getY();
-        while (x > 0 && x < cases.length - 1 && y > 0 && y < cases.length - 1) {
-            if (!cases[x + 1][y + 1].isEmpty() && cases[x + 1][y + 1].isItEquals(c.pion)) {
-                cmp++;
-                x += 1;
-                y += 1;
-            } else if (cmp < 5) return false;
-            else return true;
+        Case curseur = cases[x][0];
+        int j = 0;
+        while(j < cases[x].length){
+            curseur = cases[x][j];
+            if(curseur.getX() == c.getX() && curseur.getY() == c.getY()) b = true;
+            if(curseur.getPion() == null || !(curseur.getPion().toString().equals(c.getPion().toString()))) cmp = 0;
+            if(!curseur.isEmpty() && c.getPion().toString().equals(curseur.getPion().toString())) cmp ++;
+            if(cmp >= 5) return true;
+            System.out.println(cmp+ " "+b);
+            j++;
         }
-        return (cmp == 5);
+        return (cmp >= 5 && b);
     }
 
-    public boolean alignementDiagonalAvantGauche(Case c) {               //verifie alignement Avant gauche
-        int cmp = 1;
+    public boolean alignementVertical(Case c) {          //verifie alignement horizontal
+        int cmp =0;
+        boolean b = false;
         int x = c.getX();
         int y = c.getY();
-        while (x > 0 && x < cases.length - 1 && y > 0 && y < cases.length - 1) {
-            if (!cases[x - 1][y + 1].isEmpty() && cases[x - 1][y + 1].isItEquals(c.pion)) {
-                cmp++;
-                x -= 1;
-                y += 1;
-            } else if (cmp < 5) return false;
-            else return true;
+        Case curseur = cases[0][y];
+        int i = 0;
+        while(i < cases[x].length){
+            curseur = cases[i][y];
+            if(curseur.getX() == c.getX() && curseur.getY() == c.getY()) b = true;
+            if(curseur.getPion() == null || !(curseur.getPion().toString().equals(c.getPion().toString()))) cmp = 0;
+            if(!curseur.isEmpty() && c.getPion().toString().equals(curseur.getPion().toString())) cmp ++;
+            if(cmp >= 5) return true;
+            i++;
         }
-        return (cmp == 5);
+        return (cmp >= 5 && b);
     }
 
-    public boolean alignementDiagonalArriereDroite(Case c) {              //verifie alignement Arriere droite
-        int cmp = 1;
+    public boolean alignementDiagonal1(Case c){
         int x = c.getX();
         int y = c.getY();
-        while (x > 0 && x < cases.length - 1 && y > 0 && y < cases.length - 1) {
-            if (!cases[x + 1][y - 1].isEmpty() && cases[x + 1][y - 1].isItEquals(c.pion)) {
-                cmp++;
-                x += 1;
-                y -= 1;
-            } else if (cmp < 5) return false;
-            else return true;
+        int cmp = 0;
+        boolean b = false;
+        Case curseur = null;
+        while(x >= 0 && x < cases.length && y >= 0 && y < cases.length){
+            curseur = cases[x][y];
+            x -= 1;
+            y -= 1;
         }
-        return (cmp == 5);
+        int i = 0;
+        int j = 0;
+        while( i < cases.length && j < cases.length){
+            curseur = cases[i][j];
+            if(curseur.getX() == c.getX() && curseur.getY() == c.getY()) b = true;
+            if(curseur.getPion() == null || !(curseur.getPion().toString().equals(c.getPion().toString()))) cmp = 0;
+            if(!curseur.isEmpty() && c.getPion().toString().equals(curseur.getPion().toString())) cmp ++;
+            if(cmp >= 5) return true;
+            i++;
+            j++;
+        }
+        return (cmp >= 5 && b);
     }
 
-    public boolean alignementDiagonalArriereGauche(Case c) {             //verifie alignement Arriere gauche
-        int cmp = 1;
+    public boolean alignementDiagonal2(Case c){
         int x = c.getX();
         int y = c.getY();
-        while (x > 0 && x < cases.length - 1 && y > 0 && y < cases.length - 1) {
-            if (!cases[x - 1][y - 1].isEmpty() && cases[x - 1][y - 1].isItEquals(c.pion)) {
-                cmp++;
-                x -= 1;
-                y -= 1;
-            } else if (cmp < 5) return false;
-            else return true;
+        int cmp = 0;
+        boolean b = false;
+        Case curseur = null;
+        while(x >= 0 && x < cases.length && y >= 0 && y < cases.length){
+            curseur = cases[x][y];
+            x += 1;
+            y -= 1;
         }
-        return (cmp == 5);
+        int i = cases.length-1;
+        int j = 0;
+        while( i >= 0 && j < cases.length){
+            curseur = cases[i][j];
+            if(curseur.getX() == c.getX() && curseur.getY() == c.getY()) b = true;
+            if(curseur.getPion() == null || !(curseur.getPion().toString().equals(c.getPion().toString()))) cmp = 0;
+            if(!curseur.isEmpty() && c.getPion().toString().equals(curseur.getPion().toString())) cmp ++;
+            if(cmp >= 5) return true;
+            i--;
+            j++;
+        }
+        return (cmp >= 5 && b);
     }
 
     public boolean alignement(Case c) {          // vérifie alignement peu importe le type d'alignement
-        return (alignementVertical(c) || alignementHorizontal(c) || alignementDiagonalArriereDroite(c) ||
-                alignementDiagonalArriereGauche(c) || alignementDiagonalAvantDroite(c) || alignementDiagonalAvantGauche(c));
+        return (alignementVertical(c) || alignementHorizontal(c) || alignementDiagonal2(c) || alignementDiagonal1(c));
 
     }
 
