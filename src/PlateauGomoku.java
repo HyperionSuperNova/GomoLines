@@ -182,6 +182,8 @@ public class PlateauGomoku extends Plateau {
                                 cases[i][j].setPion("noir");
                                 if (alignement(cases[i][j])) noir.setScore(1);
                             }
+                            System.out.println("Score blanc: "+blanc.getScore());
+                            System.out.println("Score noir: "+noir.getScore());
                         } else {
                             System.out.println("Coup interdit!");
                             System.out.println("La case n'est pas vide!");

@@ -24,12 +24,7 @@ public abstract class Plateau {
 
     public void afficher() {
         int cmp = 0;               //affiche le plateau
-        System.out.print("  X ");
-        for (int i = 0; i < cases.length; i++) {
-            System.out.print(i + " ");
-        }
         System.out.println();
-        System.out.println("Y");
         for (int i = 0; i < cases.length; i++) {
             System.out.print(cmp + "   ");
             cmp++;
@@ -38,6 +33,12 @@ public abstract class Plateau {
             }
             System.out.println();
         }
+        System.out.println();
+        System.out.print("y/x ");
+        for (int i = 0; i < cases.length; i++) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
     }
 
     public boolean isFull() {
