@@ -119,13 +119,13 @@ public class PlateauGomoku extends Plateau {
         int cmp = 0;
         boolean b = false;
         Case curseur = null;
-        while(x >= 0 && x < cases.length && y >= 0 && y < cases.length){
+        while(x >= 0 && y >= 0){
             curseur = cases[x][y];
             x -= 1;
             y -= 1;
         }
-        int i = 0;
-        int j = 0;
+        int i = curseur.getX();
+        int j = curseur.getY();
         while( i < cases.length && j < cases.length){
             curseur = cases[i][j];
             if(curseur.getX() == c.getX() && curseur.getY() == c.getY()) b = true;
@@ -144,13 +144,13 @@ public class PlateauGomoku extends Plateau {
         int cmp = 0;
         boolean b = false;
         Case curseur = null;
-        while(x >= 0 && x < cases.length && y >= 0 && y < cases.length){
+        while(x < cases.length && y >= 0){
             curseur = cases[x][y];
             x += 1;
             y -= 1;
         }
-        int i = cases.length-1;
-        int j = 0;
+        int i = curseur.getX();
+        int j = curseur.getY();
         while( i >= 0 && j < cases.length){
             curseur = cases[i][j];
             if(curseur.getX() == c.getX() && curseur.getY() == c.getY()) b = true;
