@@ -8,6 +8,12 @@ public class JoueurColorLines extends Joueur{
         this.score = 0;
     }
 
+    public JoueurColorLines(String pseudo, Case [][] c){
+        this(pseudo);
+        this.cases = c;
+    }
+
+
     @Override
     public void setScore(int n) {
 
