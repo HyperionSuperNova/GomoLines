@@ -12,6 +12,9 @@ public class PlateauColorLines extends Plateau {
         cases = new CaseColorLines[dimension][dimension];
         this.j1 = j1;
     }
+    public PlateauColorLines(int dimension) {
+        super(dimension);
+    }
 
     protected void initializeThePlate() {
         for (int i = 0; i < cases.length; i++) {
@@ -26,7 +29,7 @@ public class PlateauColorLines extends Plateau {
         return new int[0];
     }
 
-    private void putThreeColors() {
+    public void putThreeColors() {
         int cmp = 0;
         while (cmp != 3) {
             int a = new Random().nextInt(longueur);
@@ -38,10 +41,6 @@ public class PlateauColorLines extends Plateau {
             cases[a][b].pion = new PionColorLines();
             cmp++;
         }
-    }
-
-    public PlateauColorLines(int dimension) {
-        super(dimension);
     }
 
     @Override
@@ -112,8 +111,10 @@ public class PlateauColorLines extends Plateau {
     public void jouer(String s) {
         switch (s) {
             case "classique":
-                putThreeColors();
+                this.putThreeColors();
+                this.afficher();
                 this.launch();
+                break;
         }
     }
 
@@ -121,7 +122,6 @@ public class PlateauColorLines extends Plateau {
         Plateau a = new PlateauColorLines(5, new JoueurColorLines("yolo"));
         a.initializeThePlate();
         while (!a.isFull()) {
-            a.afficher();
             a.jouer("classique");
         }
     }
