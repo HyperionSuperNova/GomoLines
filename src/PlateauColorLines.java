@@ -11,7 +11,6 @@ public class PlateauColorLines extends Plateau {
         super(dimension);
         cases = new CaseColorLines[dimension][dimension];
         this.j1 = j1;
-        this.j1.cases = cases;
     }
     public PlateauColorLines(int dimension) {
         super(dimension);

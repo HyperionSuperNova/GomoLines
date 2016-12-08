@@ -5,7 +5,6 @@
 public abstract class Joueur {
     protected String pseudo;
     protected int score;
-    protected Case [][] cases;
     public abstract void setScore(int n);
 
     public abstract int getScore();
