@@ -9,20 +9,13 @@ public class PlateauColorLines extends Plateau {
 
     public PlateauColorLines(int dimension, JoueurColorLines j1) {
         super(dimension);
-        cases = new CaseColorLines[dimension][dimension];
+        cases = new Case[dimension][dimension];
         this.j1 = j1;
     }
     public PlateauColorLines(int dimension) {
         super(dimension);
     }
 
-    protected void initializeThePlate() {
-        for (int i = 0; i < cases.length; i++) {
-            for (int j = 0; j < cases[i].length; j++) {
-                this.cases[i][j] = new CaseColorLines(i, j);
-            }
-        }
-    }
 
     @Override
     public int[] robot() {
@@ -48,33 +41,36 @@ public class PlateauColorLines extends Plateau {
 
     public void launch(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Quel jetons souhaitez vous déplacez ?");
+        System.out.println("Quel pions souhaitez vous déplacez ?");
         String [] t = sc.nextLine().split(",");
         int a = Integer.parseInt(t[0]);
         int b = Integer.parseInt(t[1]);
-        faire(a,b,cases[a][b].pion);
-
-    }
-
-    protected void faire(int x, int y, Pion p){
         System.out.println("Ou souhaitez vous déplacez le pion ?");
         String [] z = new Scanner(System.in).nextLine().split(",");
+        faire(Integer.parseInt(z[0]),Integer.parseInt(z[1]),cases[a][b]);
+    }
+
+    protected void faire(int x, int y, Case c){
         if (x >= 0 && x <= cases.length && y >= 0 && y < cases.length) {
             for (int i = 0; i < cases.length; i++) {
                 for (int j = 0; j < cases[i].length; j++) {
                     if (x == i && y == j) {
-                        if (isValid(cases[i][j])) {
-                            switch (p.toString()) {
+                        if (cases[i][j].isEmpty()) {
+                            switch (c.getPion().toString()) {
                                 case "rouge":
-                                    cases[i][j].setPion("rouge");
+                                    cases[i][j].fabrique("rouge");
                                     break;
                                 case "vert":
-                                    cases[i][j].setPion("vert");
+                                    cases[i][j].fabrique("vert");
                                     break;
                                 case "bleu":
-                                    cases[i][j].setPion("bleu");
+                                    cases[i][j].fabrique("bleu");
+                                    break;
+                                case "arcenciel":
+                                    cases[i][j].fabrique("arcenciel");
                                     break;
                             }
+                            c.setPion(null);
                         } else {
                             System.out.println("Coup interdit!");
                             System.out.println("La case n'est pas vide!");
@@ -82,7 +78,7 @@ public class PlateauColorLines extends Plateau {
                             System.out.println("Veuillez rentrer à nouveau des valeurs: ");
                             String s = new Scanner(System.in).nextLine();
                             String[] t = s.split(",");
-                            faire(Integer.parseInt(t[1]), Integer.parseInt(t[0]), p);
+                            faire(Integer.parseInt(t[0]), Integer.parseInt(t[1]), c);
                         }
                     }
                 }
@@ -93,7 +89,7 @@ public class PlateauColorLines extends Plateau {
             System.out.println("Veuillez entrer à nouveau des valeurs:");
             String s = new Scanner(System.in).nextLine();
             String[] t = s.split(",");
-            faire(Integer.parseInt(t[1]), Integer.parseInt(t[0]), p);
+            faire(Integer.parseInt(t[0]), Integer.parseInt(t[1]), c);
         }
     }
 

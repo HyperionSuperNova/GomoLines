@@ -1,7 +1,7 @@
 /**
  * Created by Stryker on 04/12/2016.
  */
-public abstract class Case {
+public class Case {
     protected int x;
     protected int y;
     protected Pion pion;
@@ -17,13 +17,36 @@ public abstract class Case {
         this.pion = p;
     }
 
-    public boolean isEmpty(){
-        return (pion == null);
+    public void afficher(){
+        if(!isEmpty()) pion.afficher();
+        else System.out.print("- ");
     }
-    public abstract boolean isItEquals(Pion a);
-    public abstract void afficher();
-    public abstract int getX();
-    public abstract int getY();
 
-    public abstract void setPion(String s);
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public Pion getPion() {
+        return pion;
+    }
+
+    public void fabrique(String s) {
+        this.pion = Pion.factory(s);
+    }
+
+    public void setPion(Pion a){
+        this.pion = a;
+    }
+
+    public boolean isItEquals(Pion a){
+        return pion.toString().equals(pion.toString());
+    }
+
+    public boolean isEmpty(){
+        return pion == null;
+    }
 }
