@@ -12,6 +12,7 @@ public class PlateauColorLines extends Plateau {
         cases = new Case[dimension][dimension];
         this.j1 = j1;
     }
+
     public PlateauColorLines(int dimension) {
         super(dimension);
     }
@@ -37,20 +38,21 @@ public class PlateauColorLines extends Plateau {
     }
 
     @Override
-    protected void faire(int x, int y, boolean joueur) {}
+    protected void faire(int x, int y, boolean joueur) {
+    }
 
-    public void launch(){
+    public void launch() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Quel pions souhaitez vous déplacez ?");
-        String [] t = sc.nextLine().split(",");
+        String[] t = sc.nextLine().split(",");
         int a = Integer.parseInt(t[0]);
         int b = Integer.parseInt(t[1]);
         System.out.println("Ou souhaitez vous déplacez le pion ?");
-        String [] z = new Scanner(System.in).nextLine().split(",");
-        faire(Integer.parseInt(z[0]),Integer.parseInt(z[1]),cases[a][b]);
+        String[] z = new Scanner(System.in).nextLine().split(",");
+        faire(Integer.parseInt(z[0]), Integer.parseInt(z[1]), cases[a][b]);
     }
 
-    protected void faire(int x, int y, Case c){
+    protected void faire(int x, int y, Case c) {
         if (x >= 0 && x <= cases.length && y >= 0 && y < cases.length) {
             for (int i = 0; i < cases.length; i++) {
                 for (int j = 0; j < cases[i].length; j++) {
@@ -83,7 +85,7 @@ public class PlateauColorLines extends Plateau {
                     }
                 }
             }
-        }else{
+        } else {
             System.out.println("Valeurs incorrectes!");
             afficher();
             System.out.println("Veuillez entrer à nouveau des valeurs:");
@@ -115,10 +117,10 @@ public class PlateauColorLines extends Plateau {
     }
 
     public static void main(String[] args) {
-        Plateau a = new PlateauColorLines(5, new JoueurColorLines("yolo"));
+        /*Plateau a = new PlateauColorLines(5, new JoueurColorLines("yolo"));
         a.initializeThePlate();
         while (!a.isFull()) {
             a.jouer("classique");
-        }
+        }*/
     }
 }
