@@ -53,6 +53,14 @@ public abstract class Plateau {
         return true;
     }
 
+    public void initializeThePlate() {
+        for (int i = 0; i < cases.length; i++) {
+            for (int j = 0; j < cases[i].length; j++) {
+                this.cases[i][j] = new Case(i, j);
+            }
+        }
+    }
+
 
     public boolean isValid(Case c) {
         return c.isEmpty();
@@ -61,7 +69,6 @@ public abstract class Plateau {
     public int getLargeur(){return this.largeur;}
     protected abstract void faire(int a, int b, boolean c);
     public abstract void afficherScore();
-    protected abstract void initializeThePlate();
     public abstract Case[][] getCases();
     public abstract void jouer(String s);
     public abstract int[] robot();

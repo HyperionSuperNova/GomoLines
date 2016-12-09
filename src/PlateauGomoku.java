@@ -9,7 +9,7 @@ public class PlateauGomoku extends Plateau {
 
     public PlateauGomoku(int dimension, JoueurGomoku j1, JoueurGomoku j2) {
         super(dimension);
-        cases = new CaseGomoku[dimension][dimension];
+        cases = new Case[dimension][dimension];
         this.blanc = j1;
         this.noir = j2;
     }
@@ -41,14 +41,6 @@ public class PlateauGomoku extends Plateau {
         this.afficherScore();
     }
 
-    protected void initializeThePlate() {
-        for (int i = 0; i < cases.length; i++) {
-            for (int j = 0; j < cases[i].length; j++) {
-                this.cases[i][j] = new CaseGomoku(i, j);
-            }
-        }
-    }
-
     //Factorisation du code les deux boucles for dans un constructeur c'est pas hyper propre.
 
     public int[] robot(){
@@ -65,7 +57,7 @@ public class PlateauGomoku extends Plateau {
 
 
 
-    public void setCase(CaseGomoku c) {  // peut etre a mettre dans case
+    public void setCase(Case c) {  // peut etre a mettre dans case
         for (int i = 0; i < cases.length; i++) {
             for (Case b : cases[i]) {
                 if (c.getX() == b.getX() && c.getY() == b.getY()) b = c;
@@ -73,8 +65,8 @@ public class PlateauGomoku extends Plateau {
         }
     }
 
-    public CaseGomoku[][] getCases() {
-        return (CaseGomoku[][]) cases;
+    public Case[][] getCases() {
+        return cases;
     }
 
     public boolean alignementHorizontal(Case c) {                                                                   //verifie alignement horizontal
@@ -176,10 +168,10 @@ public class PlateauGomoku extends Plateau {
                     if (x == i && y == j) {
                         if (isValid(cases[i][j])) {
                             if (joueur) {
-                                cases[i][j].setPion("blanc");
+                                cases[i][j].fabrique("blanc");
                                 if (alignement(cases[i][j])) blanc.setScore(1);
                             } else {
-                                cases[i][j].setPion("noir");
+                                cases[i][j].fabrique("noir");
                                 if (alignement(cases[i][j])) noir.setScore(1);
                             }
                             System.out.println("Score blanc: "+blanc.getScore());

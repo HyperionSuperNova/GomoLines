@@ -53,12 +53,14 @@ public class PionColorLines extends Pion{
             System.out.print("R ");
         }else if(this.couleur.name().equals("VERT")){
             System.out.print("V ");
-        }else{
+        }else if (this.couleur.name().equals("BLEU")){
             System.out.print("B ");
+        }else{
+            System.out.print("C ");
         }
     }
 
     public String toString(){
-        return this.couleur.name();
+        return this.couleur.name().toLowerCase();
     }
 }
