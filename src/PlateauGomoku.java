@@ -22,7 +22,7 @@ public class PlateauGomoku extends Plateau {
                     String[] t1 = this.blanc.jouer();
                     this.faire(Integer.parseInt(t1[0]), Integer.parseInt(t1[1]), true);
                     int [] rob = this.robot();
-                    this.faire(rob[1], rob[0], false);
+                    this.faire(rob[0], rob[1], false);
                     this.afficher();
                 }
                 break;
@@ -50,7 +50,7 @@ public class PlateauGomoku extends Plateau {
             a = (int)(Math.random()*this.getLongueur());
             b = (int)(Math.random()*this.getLongueur());
         }
-        System.out.println("Coup " + this.noir.getPseudo() + ": "+b+","+a);
+        System.out.println("Coup " + this.noir.getPseudo() + ": "+a+","+b);
         return new int[]{a,b};
     }
 
