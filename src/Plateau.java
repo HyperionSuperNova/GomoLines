@@ -36,7 +36,7 @@ public abstract class Plateau {
             System.out.println();
         }
         System.out.println();
-        System.out.print("y/x ");
+        System.out.print("x/y ");
         for (int i = 0; i < cases.length; i++) {
             System.out.print(i + " ");
         }

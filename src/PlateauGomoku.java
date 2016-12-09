@@ -20,9 +20,9 @@ public class PlateauGomoku extends Plateau {
             case "robot":
                 while (!this.isFull()) {
                     String[] t1 = this.blanc.jouer();
-                    this.faire(Integer.parseInt(t1[1]), Integer.parseInt(t1[0]), true);
+                    this.faire(Integer.parseInt(t1[0]), Integer.parseInt(t1[1]), true);
                     int [] rob = this.robot();
-                    this.faire(rob[0], rob[1], false);
+                    this.faire(rob[1], rob[0], false);
                     this.afficher();
                 }
                 break;
@@ -30,10 +30,10 @@ public class PlateauGomoku extends Plateau {
                 this.afficher();
                 while (!this.isFull()) {
                     String[] t1 = this.blanc.jouer();
-                    this.faire(Integer.parseInt(t1[1]), Integer.parseInt(t1[0]), true);
+                    this.faire(Integer.parseInt(t1[0]), Integer.parseInt(t1[1]), true);
                     this.afficher();
                     String[] t2 = this.noir.jouer();
-                    this.faire(Integer.parseInt(t2[1]), Integer.parseInt(t2[0]), false);
+                    this.faire(Integer.parseInt(t2[0]), Integer.parseInt(t2[1]), false);
                     this.afficher();
                 }
                 break;
@@ -191,7 +191,7 @@ public class PlateauGomoku extends Plateau {
                             System.out.println("Veuillez rentrer à nouveau des valeurs: ");
                             String s = sc.nextLine();
                             String[] t = s.split(",");
-                            faire(Integer.parseInt(t[1]), Integer.parseInt(t[0]), joueur);
+                            faire(Integer.parseInt(t[0]), Integer.parseInt(t[1]), joueur);
                         }
                     }
                 }
