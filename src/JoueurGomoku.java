@@ -13,11 +13,6 @@ public class JoueurGomoku extends Joueur {
         addPawns(n,role);
     }
 
-    public JoueurGomoku(String pseudo, String role, int n, Case [][] c){
-        this(pseudo,role,n);
-        this.cases = c;
-    }
-
     private void addPawns(int n, String s){
         while(pawns.size() < n){
             pawns.add(new PionGomoku(s));

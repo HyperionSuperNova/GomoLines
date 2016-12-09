@@ -12,8 +12,6 @@ public class PlateauGomoku extends Plateau {
         cases = new CaseGomoku[dimension][dimension];
         this.blanc = j1;
         this.noir = j2;
-        this.blanc.cases = cases;
-        this.noir.cases = cases;
     }
 
     @Override
