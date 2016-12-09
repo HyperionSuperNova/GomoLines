@@ -67,7 +67,6 @@ public abstract class Plateau {
     }
     public int getLongueur(){return this.longueur;}
     public int getLargeur(){return this.largeur;}
-    protected abstract void faire(int a, int b, boolean c);
     public abstract void afficherScore();
     public abstract Case[][] getCases();
     public abstract void jouer(String s);

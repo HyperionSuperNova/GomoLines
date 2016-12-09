@@ -27,6 +27,10 @@ public class JoueurGomoku extends Joueur {
         return t1;
     }
 
+    public Pion getPion(){
+        return this.pawns.get(0);
+    }
+
     @Override
     public void setScore(int n) {
         this.score += n;

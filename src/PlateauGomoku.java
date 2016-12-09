@@ -166,7 +166,7 @@ public class PlateauGomoku extends Plateau {
             for (int i = 0; i < cases.length; i++) {
                 for (int j = 0; j < cases[i].length; j++) {
                     if (x == i && y == j) {
-                        if (isValid(cases[i][j])) {
+                        if (cases[i][j].isEmpty()) {
                             if (joueur) {
                                 cases[i][j].fabrique("blanc");
                                 if (alignement(cases[i][j])) blanc.setScore(1);
