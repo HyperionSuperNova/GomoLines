@@ -6,14 +6,14 @@ public abstract class Plateau {
     protected int largeur;
     protected Case[][] cases;
 
-    //Constructeur de Plateau est appelé par les constructeur de PlateauColorLines et PlateauGomoku
-    //Représente les propriétés communes aux plateau des deux jeux.
+    //Constructeur de Plateau est appelé par les constructeurs de PlateauColorLines et PlateauGomoku
+    //Représente les propriétés communes au plateau des deux jeux.
     public Plateau(int dimension) {
         this.longueur = dimension;
         this.largeur = dimension;
     }
 
-    //Vérifie si le plateau est vide ou non (en verifiant si il y'a un pion dans une case)
+    //Vérifie si le plateau est vide ou non (en vérifiant si il y'a un pion dans une case)
     public boolean isEmpty() {
         for (int i = 0; i < cases.length; i++) {
             for (Case c : cases[i]) {
@@ -23,7 +23,7 @@ public abstract class Plateau {
         return true;
     }
 
-    //Affiche le plateau et ces Pions
+    //Affiche le plateau et ses Pions
     public void afficher() {
         int cmp = 0;               //affiche le plateau
         System.out.println();
@@ -43,7 +43,7 @@ public abstract class Plateau {
         System.out.println();
     }
 
-    //Vérifie si le plateau est plein ou non sert de condition d'ârret parfois
+    //Vérifie si le plateau est plein ou non. Sert de condition d'ârret parfois
     public boolean isFull() {
         for (int i = 0; i < cases.length; i++) {
             for (Case c : cases[i]) {

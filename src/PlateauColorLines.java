@@ -40,14 +40,19 @@ public class PlateauColorLines extends Plateau {
 
     public void launch() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Quel pions souhaitez vous déplacez ?");
+        System.out.println("Quel pion souhaitez vous déplacer ?");
         String[] t = sc.nextLine().split(",");
         int a = Integer.parseInt(t[0]);
         int b = Integer.parseInt(t[1]);
-        System.out.println("Ou souhaitez vous déplacez le pion ?");
-        String[] z = new Scanner(System.in).nextLine().split(",");
-        faire(Integer.parseInt(z[0]), Integer.parseInt(z[1]), cases[a][b]);
-        afficherScore();
+        if(cases[a][b].pion == null) {
+            System.out.println("Impossible de déplacer ce pion! La case est vide!");
+            launch();
+        }else{
+            System.out.println("Ou souhaitez vous déplacer le pion ?");
+            String[] z = new Scanner(System.in).nextLine().split(",");
+            faire(Integer.parseInt(z[0]), Integer.parseInt(z[1]), cases[a][b]);
+            afficherScore();
+        }
     }
 
     protected void faire(int x, int y, Case c) {
