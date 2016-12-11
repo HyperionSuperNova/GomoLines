@@ -37,10 +37,6 @@ public class PlateauColorLines extends Plateau {
         }
     }
 
-    @Override
-    protected void faire(int x, int y, boolean joueur) {
-    }
-
     public void launch() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Quel pions souhaitez vous déplacez ?");
@@ -116,11 +112,4 @@ public class PlateauColorLines extends Plateau {
         }
     }
 
-    public static void main(String[] args) {
-        /*Plateau a = new PlateauColorLines(5, new JoueurColorLines("yolo"));
-        a.initializeThePlate();
-        while (!a.isFull()) {
-            a.jouer("classique");
-        }*/
-    }
 }
