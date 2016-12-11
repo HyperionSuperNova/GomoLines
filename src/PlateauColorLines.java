@@ -228,6 +228,13 @@ public class PlateauColorLines extends Plateau {
         if (a && b || a && c || a && d || b && c || b && d || c && d) {
             j1.setScore(2);
         }
+
+        if(a && b && c || a && b && d || b && c && d || a && c && d){
+            j1.setScore(3);
+        }
+        if(a && b && c && d){
+            j1.setScore(4);
+        }
     }
 
     @Override
