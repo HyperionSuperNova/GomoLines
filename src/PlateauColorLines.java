@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -70,7 +71,7 @@ public class PlateauColorLines extends Plateau {
                                     break;
                             }
                             c.setPion(null);
-                            if(alignementVertical(cases[i][j])) j1.setScore(1);
+                            alignement(cases[i][j]);
                         } else {
                             System.out.println("Coup interdit!");
                             System.out.println("La case n'est pas vide!");
@@ -97,6 +98,7 @@ public class PlateauColorLines extends Plateau {
         int cmp =0;
         int x = c.getX();
         int y = c.getY();
+        boolean b = false;
         Case curseur;
         String couleur = cases[x][y].getPion().toString();
         int i = 0;
@@ -104,19 +106,54 @@ public class PlateauColorLines extends Plateau {
             curseur = cases[i][y];
             if(curseur.pion == null){
                 cmp = 0;
-            }else if(couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel")){
+            }else if(couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")){
                 ++cmp;
+                if(!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
             }else{
                 couleur = curseur.getPion().toString();
                 cmp=0;
             }
-            if(cmp >= 5) return true;
-            System.out.println(cmp);
+            if(cmp >= 5){
+                j1.setScore(1);
+                b = true;
+            }
             i++;
         }
-        System.out.println(couleur);
-        System.out.println(cmp);
-        return (cmp >= 5);
+        return (b);
+    }
+
+    public boolean alignementHorizontal(Case c){
+        int cmp =0;
+        int x = c.getX();
+        int y = c.getY();
+        boolean b = false;
+        Case curseur;
+        String couleur = cases[x][y].getPion().toString();
+        int i = 0;
+        while(i < this.largeur){
+            curseur = cases[x][i];
+            if(curseur.pion == null){
+                cmp = 0;
+            }else if(couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")){
+                ++cmp;
+                if(!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
+            }else{
+                couleur = curseur.getPion().toString();
+                cmp=0;
+            }
+            if(cmp >= 5){
+                j1.setScore(1);
+                b = true;
+            }
+            i++;
+        }
+        return (b);
+    }
+
+    public void alignement(Case c){
+        if(alignementVertical(c) && alignementHorizontal(c)){
+            j1.setScore(2);
+        }
     }
 
     @Override
