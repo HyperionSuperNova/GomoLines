@@ -54,8 +54,10 @@ public class PlateauGomoku extends Plateau {
         return new int[]{a,b};
     }
 
+    public boolean alignement(Case c) {          // vérifie alignement peu importe le type d'alignement
+        return (alignementVertical(c) || alignementHorizontal(c) || alignementDiagonal2(c) || alignementDiagonal1(c));
 
-
+    }
 
     public void setCase(Case c) {  // peut etre a mettre dans case
         for (int i = 0; i < cases.length; i++) {
@@ -155,10 +157,7 @@ public class PlateauGomoku extends Plateau {
         return (cmp >= 5 && b);
     }
 
-    public boolean alignement(Case c) {          // vérifie alignement peu importe le type d'alignement
-        return (alignementVertical(c) || alignementHorizontal(c) || alignementDiagonal2(c) || alignementDiagonal1(c));
 
-    }
 
     public void faire(int x, int y, boolean joueur) {
         Scanner sc = new Scanner(System.in);

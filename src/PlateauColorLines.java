@@ -46,6 +46,7 @@ public class PlateauColorLines extends Plateau {
         System.out.println("Ou souhaitez vous déplacez le pion ?");
         String[] z = new Scanner(System.in).nextLine().split(",");
         faire(Integer.parseInt(z[0]), Integer.parseInt(z[1]), cases[a][b]);
+        afficherScore();
     }
 
     protected void faire(int x, int y, Case c) {
@@ -69,6 +70,7 @@ public class PlateauColorLines extends Plateau {
                                     break;
                             }
                             c.setPion(null);
+                            if(alignementVertical(cases[i][j])) j1.setScore(1);
                         } else {
                             System.out.println("Coup interdit!");
                             System.out.println("La case n'est pas vide!");
@@ -91,9 +93,35 @@ public class PlateauColorLines extends Plateau {
         }
     }
 
+    public boolean alignementVertical(Case c) {
+        int cmp =0;
+        int x = c.getX();
+        int y = c.getY();
+        Case curseur;
+        String couleur = cases[x][y].getPion().toString();
+        int i = 0;
+        while(i < this.longueur){
+            curseur = cases[i][y];
+            if(curseur.pion == null){
+                cmp = 0;
+            }else if(couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel")){
+                ++cmp;
+            }else{
+                couleur = curseur.getPion().toString();
+                cmp=0;
+            }
+            if(cmp >= 5) return true;
+            System.out.println(cmp);
+            i++;
+        }
+        System.out.println(couleur);
+        System.out.println(cmp);
+        return (cmp >= 5);
+    }
+
     @Override
     public void afficherScore() {
-
+        System.out.println("Score du joueur: " + j1.getScore());
     }
 
     @Override

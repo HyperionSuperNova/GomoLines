@@ -11,12 +11,12 @@ public class JoueurColorLines extends Joueur{
 
     @Override
     public void setScore(int n) {
-
+        this.score += n;
     }
 
     @Override
     public int getScore() {
-        return 0;
+        return this.score;
     }
 
     @Override
