@@ -95,25 +95,25 @@ public class PlateauColorLines extends Plateau {
     }
 
     public boolean alignementVertical(Case c) {
-        int cmp =0;
+        int cmp = 0;
         int x = c.getX();
         int y = c.getY();
         boolean b = false;
         Case curseur;
         String couleur = cases[x][y].getPion().toString();
         int i = 0;
-        while(i < this.longueur){
+        while (i < this.longueur) {
             curseur = cases[i][y];
-            if(curseur.pion == null){
+            if (curseur.pion == null) {
                 cmp = 0;
-            }else if(couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")){
+            } else if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
                 ++cmp;
-                if(!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
-            }else{
+                if (!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
+            } else {
                 couleur = curseur.getPion().toString();
-                cmp=0;
+                cmp = 0;
             }
-            if(cmp >= 5){
+            if (cmp >= 5) {
                 j1.setScore(1);
                 b = true;
             }
@@ -122,26 +122,26 @@ public class PlateauColorLines extends Plateau {
         return (b);
     }
 
-    public boolean alignementHorizontal(Case c){
-        int cmp =0;
+    public boolean alignementHorizontal(Case c) {
+        int cmp = 0;
         int x = c.getX();
         int y = c.getY();
         boolean b = false;
         Case curseur;
         String couleur = cases[x][y].getPion().toString();
         int i = 0;
-        while(i < this.largeur){
+        while (i < this.largeur) {
             curseur = cases[x][i];
-            if(curseur.pion == null){
+            if (curseur.pion == null) {
                 cmp = 0;
-            }else if(couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")){
+            } else if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
                 ++cmp;
-                if(!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
-            }else{
+                if (!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
+            } else {
                 couleur = curseur.getPion().toString();
-                cmp=0;
+                cmp = 0;
             }
-            if(cmp >= 5){
+            if (cmp >= 5) {
                 j1.setScore(1);
                 b = true;
             }
@@ -150,8 +150,82 @@ public class PlateauColorLines extends Plateau {
         return (b);
     }
 
-    public void alignement(Case c){
-        if(alignementVertical(c) && alignementHorizontal(c)){
+    public boolean alignementDiagonal1(Case c) {
+        int x = c.getX();
+        int y = c.getY();
+        int cmp = 0;
+        boolean b = false;
+        String couleur = cases[x][y].getPion().toString();
+        Case curseur = null;
+        while (x >= 0 && y >= 0) {
+            curseur = cases[x][y];
+            x -= 1;
+            y -= 1;
+        }
+        x = curseur.getX();
+        y = curseur.getY();
+        while (x < cases.length && y < cases.length) {
+            curseur = cases[x][y];
+            if (curseur.pion == null) {
+                cmp = 0;
+            } else if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
+                ++cmp;
+                if (!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
+            } else {
+                couleur = curseur.getPion().toString();
+                cmp = 0;
+            }
+            if (cmp >= 5) {
+                j1.setScore(1);
+                b = true;
+            }
+            x++;
+            y++;
+        }
+        return (b);
+    }
+
+
+    public boolean alignementDiagonal2(Case c){
+        int x = c.getX();                                                                                           //  _____________________
+        int y = c.getY();                                                                                           //  |___|___|___|___| / |
+        int cmp = 0;                                                                                                //  |___|___|___| / |___|
+        boolean b = false;
+        String couleur = cases[x][y].getPion().toString();
+        Case curseur = null;                                                                                        //  |___| L |___|___|___|
+        while(x < cases.length && y >= 0){                                                                          //  |___|___|___|___|___|
+            curseur = cases[x][y];
+            x += 1;
+            y -= 1;
+        }
+        x = curseur.getX();
+        y = curseur.getY();
+        while( x >= 0 && y < cases.length){
+            curseur = cases[x][y];
+            if (curseur.pion == null) {
+                cmp = 0;
+            } else if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
+                ++cmp;
+                if (!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
+            } else {
+                couleur = curseur.getPion().toString();
+                cmp = 0;
+            }
+            if (cmp >= 5) {
+                j1.setScore(1);
+                b = true;
+            }
+        }
+        return (b);
+    }
+
+    //A finir
+    public void alignement(Case cas) {
+        boolean a = alignementVertical(cas);
+        boolean b = alignementHorizontal(cas);
+        boolean c = alignementDiagonal1(cas);
+        boolean d = alignementDiagonal2(cas);
+        if (a && b || a && c || a && d || b && c || b && d || c && d) {
             j1.setScore(2);
         }
     }
