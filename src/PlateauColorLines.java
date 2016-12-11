@@ -205,7 +205,7 @@ public class PlateauColorLines extends Plateau {
         }
         x = curseur.getX();
         y = curseur.getY();
-        while( x >= 0 && y < cases.length){
+        while(x >= 0 && y < cases.length){
             curseur = cases[x][y];
             if (curseur.pion == null) {
                 cmp = 0;
@@ -220,6 +220,8 @@ public class PlateauColorLines extends Plateau {
                 j1.setScore(1);
                 b = true;
             }
+            x--;
+            y++;
         }
         return (b);
     }
