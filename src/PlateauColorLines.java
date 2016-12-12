@@ -218,12 +218,14 @@ public class PlateauColorLines extends Plateau {
         int deb1 = curseur.getX();
         int deb2 = curseur.getY();
         while (x >= 0 && y < cases.length) {
+            curseur = cases[x][y];
             if (curseur.pion == null) {
                 cmp = 0;
             } else {
                 if (!couleur.equals("arcenciel")) couleur = curseur.getPion().toString();
                 if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
                     cmp++;
+                    System.out.println(cmp);
                 } else {
                     couleur = curseur.getPion().toString();
                     cmp = 0;
