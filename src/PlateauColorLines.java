@@ -120,9 +120,9 @@ public class PlateauColorLines extends Plateau {
                 if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel")) {
                     cmp++;
                 } else {
-                    couleur = curseur.getPion().toString();
                     croisement = false;
                     cmp = 0;
+                    i--;
                 }
             }
             if (cmp >= 5) {
@@ -156,9 +156,9 @@ public class PlateauColorLines extends Plateau {
                 if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel")) {
                     cmp++;
                 } else {
-                    couleur = curseur.getPion().toString();
                     croisement = false;
                     cmp = 0;
+                    i--;
                 }
             }
             if (cmp >= 5) {
@@ -200,9 +200,10 @@ public class PlateauColorLines extends Plateau {
                 if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel")) {
                     cmp++;
                 } else {
-                    couleur = curseur.getPion().toString();
                     croisement = false;
                     cmp = 0;
+                    x--;
+                    y--;
                 }
             }
             if (cmp >= 5) {
@@ -245,9 +246,10 @@ public class PlateauColorLines extends Plateau {
                 if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel")) {
                     cmp++;
                 } else {
-                    couleur = curseur.getPion().toString();
                     croisement = false;
                     cmp = 0;
+                    x++;
+                    y--;
                 }
             }
             if (cmp >= 5) {
