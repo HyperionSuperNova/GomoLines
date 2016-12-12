@@ -119,14 +119,13 @@ public class PlateauColorLines extends Plateau {
                     croisement = true;
                 }
                 if(curseur.pion.toString().equals("arcenciel")){
-                    cmp++;
                     arc++;
                 }
-                if (couleur.equals(curseur.pion.toString())) {
+                if (couleur.equals(curseur.pion.toString())  || curseur.pion.toString().equals("arcenciel")) {
                     cmp++;
                 } else {
                     croisement = false;
-                    cmp = arc+1;
+                    cmp = arc;
                     arc = 0;
                     i--;
                 }
@@ -145,6 +144,7 @@ public class PlateauColorLines extends Plateau {
         int cmp = 0;
         int x = c.getX();
         int y = c.getY();
+        int arc = 0;
         boolean b = false;
         boolean croisement = false;
         Case curseur;
@@ -159,20 +159,23 @@ public class PlateauColorLines extends Plateau {
                     couleur = curseur.getPion().toString();
                     croisement = true;
                 }
-                if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel")) {
+                if(curseur.pion.toString().equals("arcenciel")){
+                    arc++;
+                }
+                if (couleur.equals(curseur.pion.toString())  || curseur.pion.toString().equals("arcenciel")) {
                     cmp++;
                 } else {
                     croisement = false;
-                    cmp = 0;
+                    cmp = arc;
+                    arc = 0;
                     i--;
                 }
             }
             if (cmp >= 5) {
                 j1.setScore(cmp % 4);
                 b = true;
-                suppressionDesPionsHorizontal(i + (1 - cmp), cmp, x, c);
+                suppressionDesPionsVertical(i + (1 - cmp), cmp, y, c);
             }
-            i++;
         }
         return (b);
     }
