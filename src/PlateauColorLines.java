@@ -105,15 +105,19 @@ public class PlateauColorLines extends Plateau {
         int y = c.getY();
         boolean b = false;
         Case curseur;
-        String couleur = cases[x][y].getPion().toString();
+        String couleur = c.pion.toString();
         int i = 0;
         while (i < this.longueur) {
             curseur = cases[i][y];
             if (curseur.pion == null) {
                 cmp = 0;
-            } else if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
-                ++cmp;
-                if (!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
+            } else if (c.isItEquals(curseur.pion) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
+                cmp++;
+                System.out.println(cmp);
+                if (!curseur.pion.toString().equals("arcenciel")){
+                    couleur = curseur.getPion().toString();
+                    cmp++;
+                }
             } else {
                 couleur = curseur.getPion().toString();
                 cmp = 0;
