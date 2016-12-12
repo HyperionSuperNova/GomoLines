@@ -112,7 +112,7 @@ public class PlateauColorLines extends Plateau {
             if (curseur.pion == null) {
                 cmp = 0;
             } else {
-                if (!couleur.equals("arcenciel")) couleur = curseur.getPion().toString();
+                if (!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
                 if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
                     cmp++;
                 } else {
@@ -143,7 +143,7 @@ public class PlateauColorLines extends Plateau {
             if (curseur.pion == null) {
                 cmp = 0;
             } else {
-                if (!couleur.equals("arcenciel")) couleur = curseur.getPion().toString();
+                if (!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
                 if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
                     cmp++;
                 } else {
@@ -182,7 +182,7 @@ public class PlateauColorLines extends Plateau {
             if (curseur.pion == null) {
                 cmp = 0;
             } else {
-                if (!couleur.equals("arcenciel")) couleur = curseur.getPion().toString();
+                if (!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
                 if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
                     cmp++;
                 } else {
@@ -222,7 +222,7 @@ public class PlateauColorLines extends Plateau {
             if (curseur.pion == null) {
                 cmp = 0;
             } else {
-                if (!couleur.equals("arcenciel")) couleur = curseur.getPion().toString();
+                if (!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
                 if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
                     cmp++;
                     System.out.println(cmp);
