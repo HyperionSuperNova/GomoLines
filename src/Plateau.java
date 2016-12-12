@@ -103,7 +103,7 @@ public abstract class Plateau {
         }
 
         public boolean isItEquals(Pion a){
-            return pion.toString().equals(pion.toString());
+            return pion.toString().equals(a.toString());
         }
 
         public boolean isEmpty(){
