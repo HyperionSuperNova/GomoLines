@@ -121,10 +121,9 @@ public class PlateauColorLines extends Plateau {
                 }
             }
             if (cmp >= 5) {
-                j1.setScore(cmp%4);
+                j1.setScore(cmp % 4);
                 b = true;
-                if (alignementHorizontal(c)) j1.setScore(1);
-                suppressionDesPionsVertical(i + (1-cmp),cmp,y);
+                suppressionDesPionsVertical(i + (1 - cmp), cmp, y, c);
             }
             i++;
         }
@@ -153,15 +152,15 @@ public class PlateauColorLines extends Plateau {
                 }
             }
             if (cmp >= 5) {
-                j1.setScore(cmp%4);
+                j1.setScore(cmp % 4);
                 b = true;
-                suppressionDesPionsHorizontal(i + (1-cmp),cmp,x);
+                suppressionDesPionsHorizontal(i + (1 - cmp), cmp, x, c);
             }
             i++;
         }
         return (b);
     }
-    /*
+
     public boolean alignementDiagonal1(Case c) {
         int x = c.getX();
         int y = c.getY();
@@ -176,27 +175,31 @@ public class PlateauColorLines extends Plateau {
         }
         x = curseur.getX();
         y = curseur.getY();
+        int deb1 = curseur.getX();
+        int deb2 = curseur.getY();
         while (x < cases.length && y < cases.length) {
             curseur = cases[x][y];
             if (curseur.pion == null) {
                 cmp = 0;
-            } else if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
-                ++cmp;
-                if (!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
             } else {
-                couleur = curseur.getPion().toString();
-                cmp = 0;
+                if (!couleur.equals("arcenciel")) couleur = curseur.getPion().toString();
+                if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
+                    cmp++;
+                } else {
+                    couleur = curseur.getPion().toString();
+                    cmp = 0;
+                }
             }
             if (cmp >= 5) {
-                j1.setScore(1);
+                j1.setScore(cmp % 4);
                 b = true;
+                suppressionDesPionsDiagonaux1(deb1, deb2, cmp, c);
             }
             x++;
             y++;
         }
         return (b);
     }
-
 
     public boolean alignementDiagonal2(Case c) {
         int x = c.getX();                                                                                           //  _____________________
@@ -212,32 +215,35 @@ public class PlateauColorLines extends Plateau {
         }
         x = curseur.getX();
         y = curseur.getY();
+        int deb1 = curseur.getX();
+        int deb2 = curseur.getY();
         while (x >= 0 && y < cases.length) {
-            curseur = cases[x][y];
             if (curseur.pion == null) {
                 cmp = 0;
-            } else if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
-                ++cmp;
-                if (!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
             } else {
-                couleur = curseur.getPion().toString();
-                cmp = 0;
+                if (!couleur.equals("arcenciel")) couleur = curseur.getPion().toString();
+                if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
+                    cmp++;
+                } else {
+                    couleur = curseur.getPion().toString();
+                    cmp = 0;
+                }
             }
             if (cmp >= 5) {
-                j1.setScore(1);
+                j1.setScore(cmp % 4);
                 b = true;
+                suppressionDesPionsDiagonaux2(deb1, deb2, cmp, c);
             }
             x--;
             y++;
         }
         return (b);
-    }*/
+    }
 
-    //A finir
     public void alignement(Case cas) {
         boolean a = alignementVertical(cas);
-        //boolean b = alignementHorizontal(cas);
-        /*boolean c = alignementDiagonal1(cas);
+        boolean b = alignementHorizontal(cas);
+        boolean c = alignementDiagonal1(cas);
         boolean d = alignementDiagonal2(cas);
         if (a && b || a && c || a && d || b && c || b && d || c && d) {
             j1.setScore(2);
@@ -248,22 +254,50 @@ public class PlateauColorLines extends Plateau {
         }
         if (a && b && c && d) {
             j1.setScore(4);
-        }*/
+        }
+
+        if (a || b || c || d) {
+            cas.pion = null;
+        }
     }
 
-    public void suppressionDesPionsVertical(int debut, int fin, int y){
+    public void suppressionDesPionsVertical(int debut, int fin, int y, Case c) {
         int i = debut;
-        while (i < fin){
-            cases[i][y].pion = null;
+        while (i < fin) {
+            if (cases[i][y] != c) {
+                cases[i][y].pion = null;
+            }
             i++;
         }
     }
 
-    public void suppressionDesPionsHorizontal(int debut,int fin, int x){
+    public void suppressionDesPionsHorizontal(int debut, int fin, int x, Case c) {
         int i = debut;
-        while(i < debut){
-            cases[x][i].pion = null;
+        while (i < fin) {
+            if (cases[x][i] != c) {
+                cases[x][i].pion = null;
+            }
             i++;
+        }
+    }
+
+    public void suppressionDesPionsDiagonaux1(int deb1, int deb2, int fin, Case c) {
+        while (deb1 < fin && deb2 < fin) {
+            if (cases[deb1][deb2] != c) {
+                cases[deb1][deb2].pion = null;
+            }
+            deb1++;
+            deb2++;
+        }
+    }
+
+    public void suppressionDesPionsDiagonaux2(int deb1,int deb2, int fin, Case c){
+        while(deb1 >= 0 && deb2 < fin){
+            if (cases[deb1][deb2] != c) {
+                cases[deb1][deb2].pion = null;
+            }
+            deb1--;
+            deb2++;
         }
     }
 
