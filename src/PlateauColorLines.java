@@ -111,18 +111,20 @@ public class PlateauColorLines extends Plateau {
             curseur = cases[i][y];
             if (curseur.pion == null) {
                 cmp = 0;
-            } else if(!couleur.equals("arcenciel")){
-                couleur = curseur.getPion().toString();
-            }
-            if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
-                cmp++;
             } else {
-                couleur = curseur.getPion().toString();
-                cmp = 0;
+                if (!couleur.equals("arcenciel")) couleur = curseur.getPion().toString();
+                if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
+                    cmp++;
+                } else {
+                    couleur = curseur.getPion().toString();
+                    cmp = 0;
+                }
             }
             if (cmp >= 5) {
-                j1.setScore(1);
+                j1.setScore(cmp%4);
                 b = true;
+                if (alignementHorizontal(c)) j1.setScore(1);
+                suppressionDesPionsVertical(i + (1-cmp),cmp,y);
             }
             i++;
         }
@@ -135,28 +137,31 @@ public class PlateauColorLines extends Plateau {
         int y = c.getY();
         boolean b = false;
         Case curseur;
-        String couleur = cases[x][y].getPion().toString();
         int i = 0;
+        String couleur = cases[x][y].getPion().toString();
         while (i < this.largeur) {
             curseur = cases[x][i];
             if (curseur.pion == null) {
                 cmp = 0;
-            } else if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
-                ++cmp;
-                if (!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
             } else {
-                couleur = curseur.getPion().toString();
-                cmp = 0;
+                if (!couleur.equals("arcenciel")) couleur = curseur.getPion().toString();
+                if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
+                    cmp++;
+                } else {
+                    couleur = curseur.getPion().toString();
+                    cmp = 0;
+                }
             }
             if (cmp >= 5) {
-                j1.setScore(1);
+                j1.setScore(cmp%4);
                 b = true;
+                suppressionDesPionsHorizontal(i + (1-cmp),cmp,x);
             }
             i++;
         }
         return (b);
     }
-
+    /*
     public boolean alignementDiagonal1(Case c) {
         int x = c.getX();
         int y = c.getY();
@@ -226,13 +231,13 @@ public class PlateauColorLines extends Plateau {
             y++;
         }
         return (b);
-    }
+    }*/
 
     //A finir
     public void alignement(Case cas) {
         boolean a = alignementVertical(cas);
-        boolean b = alignementHorizontal(cas);
-        boolean c = alignementDiagonal1(cas);
+        //boolean b = alignementHorizontal(cas);
+        /*boolean c = alignementDiagonal1(cas);
         boolean d = alignementDiagonal2(cas);
         if (a && b || a && c || a && d || b && c || b && d || c && d) {
             j1.setScore(2);
@@ -243,6 +248,22 @@ public class PlateauColorLines extends Plateau {
         }
         if (a && b && c && d) {
             j1.setScore(4);
+        }*/
+    }
+
+    public void suppressionDesPionsVertical(int debut, int fin, int y){
+        int i = debut;
+        while (i < fin){
+            cases[i][y].pion = null;
+            i++;
+        }
+    }
+
+    public void suppressionDesPionsHorizontal(int debut,int fin, int x){
+        int i = debut;
+        while(i < debut){
+            cases[x][i].pion = null;
+            i++;
         }
     }
 
