@@ -108,6 +108,7 @@ public class PlateauColorLines extends Plateau {
         Case curseur;
         String couleur = cases[x][y].getPion().toString();
         int i = 0;
+        int arc = 0;
         while (i < this.longueur) {
             curseur = cases[i][y];
             if (curseur.pion == null) {
@@ -117,11 +118,16 @@ public class PlateauColorLines extends Plateau {
                     couleur = curseur.getPion().toString();
                     croisement = true;
                 }
-                if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel")) {
+                if(curseur.pion.toString().equals("arcenciel")){
+                    cmp++;
+                    arc++;
+                }
+                if (couleur.equals(curseur.pion.toString())) {
                     cmp++;
                 } else {
                     croisement = false;
-                    cmp = 0;
+                    cmp = arc+1;
+                    arc = 0;
                     i--;
                 }
             }
