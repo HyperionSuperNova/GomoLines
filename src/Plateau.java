@@ -110,10 +110,6 @@ public abstract class Plateau {
             return pion == null;
         }
     }
-
-
-    public int getLongueur(){return this.longueur;}
-    public int getLargeur(){return this.largeur;}
     public abstract void afficherScore();
     public abstract Case[][] getCases();
     public abstract void jouer(String s);

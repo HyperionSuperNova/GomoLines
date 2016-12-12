@@ -48,11 +48,11 @@ public class PlateauGomoku extends Plateau {
     //Factorisation du code les deux boucles for dans un constructeur c'est pas hyper propre.
 
     public int[] robot(){
-        int a = (int)(Math.random()*this.getLongueur());
-        int b = (int)(Math.random()*this.getLargeur());
+        int a = (int)(Math.random()*this.longueur);
+        int b = (int)(Math.random()*this.largeur);
         while(!this.getCases()[a][b].isEmpty()){
-            a = (int)(Math.random()*this.getLongueur());
-            b = (int)(Math.random()*this.getLongueur());
+            a = (int)(Math.random()*this.longueur);
+            b = (int)(Math.random()*this.largeur);
         }
         System.out.println("Coup " + this.noir.getPseudo() + ": "+a+","+b);
         return new int[]{a,b};
