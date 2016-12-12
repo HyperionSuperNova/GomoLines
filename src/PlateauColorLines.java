@@ -163,6 +163,7 @@ public class PlateauColorLines extends Plateau {
                     arc++;
                 }
                 if (couleur.equals(curseur.pion.toString())  || curseur.pion.toString().equals("arcenciel")) {
+                    System.out.println(cmp);
                     cmp++;
                 } else {
                     croisement = false;
@@ -176,6 +177,7 @@ public class PlateauColorLines extends Plateau {
                 b = true;
                 suppressionDesPionsVertical(i + (1 - cmp), cmp, y, c);
             }
+            i++;
         }
         return (b);
     }
@@ -186,6 +188,7 @@ public class PlateauColorLines extends Plateau {
         int cmp = 0;
         boolean b = false;
         boolean croisement = false;
+        int arc = 0;
         String couleur = cases[x][y].getPion().toString();
         Case curseur = null;
         while (x >= 0 && y >= 0) {
@@ -206,11 +209,17 @@ public class PlateauColorLines extends Plateau {
                     couleur = curseur.getPion().toString();
                     croisement = true;
                 }
+                if(curseur.pion.toString().equals("arcenciel")){
+                    arc++;
+                }
                 if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel")) {
                     cmp++;
                 } else {
                     croisement = false;
-                    cmp = 0;
+                    cmp = arc;
+                    deb1 = curseur.getX()-arc;
+                    deb2 = curseur.getY()-arc;
+                    arc = 0;
                     x--;
                     y--;
                 }
@@ -218,6 +227,7 @@ public class PlateauColorLines extends Plateau {
             if (cmp >= 5) {
                 j1.setScore(cmp % 4);
                 b = true;
+                System.out.println(deb1+" "+deb2);
                 suppressionDesPionsDiagonaux1(deb1, deb2, cmp, c);
             }
             x++;
@@ -232,6 +242,7 @@ public class PlateauColorLines extends Plateau {
         int cmp = 0;
         boolean croisement = false;                                                                                 //  |___|___|___| / |___|
         boolean b = false;
+        int arc = 0;
         String couleur = cases[x][y].getPion().toString();
         Case curseur = null;                                                                                        //  |___| L |___|___|___|
         while (x < cases.length && y >= 0) {                                                                          //  |___|___|___|___|___|
@@ -252,11 +263,17 @@ public class PlateauColorLines extends Plateau {
                     couleur = curseur.getPion().toString();
                     croisement = true;
                 }
+                if(curseur.pion.toString().equals("arcenciel")){
+                    arc++;
+                }
                 if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel")) {
                     cmp++;
                 } else {
                     croisement = false;
-                    cmp = 0;
+                    cmp = arc;
+                    deb1 = curseur.getX()+arc;
+                    deb2 = curseur.getY()-arc;
+                    arc =0;
                     x++;
                     y--;
                 }
@@ -296,6 +313,7 @@ public class PlateauColorLines extends Plateau {
     public void suppressionDesPionsVertical(int debut, int fin, int y, Case c) {
         int i = debut;
         while (i < fin) {
+            System.out.println(debut+" "+i);
             if (cases[i][y] != c) {
                 cases[i][y].pion = null;
             }
