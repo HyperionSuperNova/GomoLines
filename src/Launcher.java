@@ -16,7 +16,8 @@ public class Launcher {
         System.out.println("Which Game do you want to play ?");
         System.out.println("a) I want to Play Gomoku !");
         System.out.println("b) I want to play ColorLines !");
-        if(new Scanner(System.in).nextLine().equals("a")){
+        String s = new Scanner(System.in).nextLine();
+        if(s.equals("a") || s.equals("A")){
             GomokuLaunch(dimension);
         }else{
             ColorLinesLaunch(dimension);

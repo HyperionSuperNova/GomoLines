@@ -138,7 +138,7 @@ public class PlateauColorLines extends Plateau {
         while (i < this.largeur) {
             curseur = cases[x][i];
             if (curseur.pion == null) {
-                cmp = 0;
+                cmp = 0; // plutot c.couleur.equals? que couleur.equals? car si commence par rouge alors que je crée un alignement de bleu juste apres, ne compte pas l'alignement
             } else if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
                 ++cmp;
                 if (!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
@@ -192,13 +192,13 @@ public class PlateauColorLines extends Plateau {
 
 
     public boolean alignementDiagonal2(Case c){
-        int x = c.getX();                                                                                           //  _____________________
-        int y = c.getY();                                                                                           //  |___|___|___|___| / |
-        int cmp = 0;                                                                                                //  |___|___|___| / |___|
+        int x = c.getX();
+        int y = c.getY();
+        int cmp = 0;
         boolean b = false;
         String couleur = cases[x][y].getPion().toString();
-        Case curseur = null;                                                                                        //  |___| L |___|___|___|
-        while(x < cases.length && y >= 0){                                                                          //  |___|___|___|___|___|
+        Case curseur = null;
+        while(x < cases.length && y >= 0){
             curseur = cases[x][y];
             x += 1;
             y -= 1;
