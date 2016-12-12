@@ -44,10 +44,10 @@ public class PlateauColorLines extends Plateau {
         String[] t = sc.nextLine().split(",");
         int a = Integer.parseInt(t[0]);
         int b = Integer.parseInt(t[1]);
-        if(cases[a][b].pion == null) {
+        if (cases[a][b].pion == null) {
             System.out.println("Impossible de déplacer ce pion! La case est vide!");
             launch();
-        }else{
+        } else {
             System.out.println("Ou souhaitez vous déplacer le pion ?");
             String[] z = new Scanner(System.in).nextLine().split(",");
             faire(Integer.parseInt(z[0]), Integer.parseInt(z[1]), cases[a][b]);
@@ -105,19 +105,17 @@ public class PlateauColorLines extends Plateau {
         int y = c.getY();
         boolean b = false;
         Case curseur;
-        String couleur = c.pion.toString();
+        String couleur = cases[x][y].getPion().toString();
         int i = 0;
         while (i < this.longueur) {
             curseur = cases[i][y];
             if (curseur.pion == null) {
                 cmp = 0;
-            } else if (c.isItEquals(curseur.pion) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
+            } else if(!couleur.equals("arcenciel")){
+                couleur = curseur.getPion().toString();
+            }
+            if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
                 cmp++;
-                System.out.println(cmp);
-                if (!curseur.pion.toString().equals("arcenciel")){
-                    couleur = curseur.getPion().toString();
-                    cmp++;
-                }
             } else {
                 couleur = curseur.getPion().toString();
                 cmp = 0;
@@ -142,7 +140,7 @@ public class PlateauColorLines extends Plateau {
         while (i < this.largeur) {
             curseur = cases[x][i];
             if (curseur.pion == null) {
-                cmp = 0; // plutot c.couleur.equals? que couleur.equals? car si commence par rouge alors que je crée un alignement de bleu juste apres, ne compte pas l'alignement
+                cmp = 0;
             } else if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel") || couleur.equals("arcenciel")) {
                 ++cmp;
                 if (!curseur.pion.toString().equals("arcenciel")) couleur = curseur.getPion().toString();
@@ -195,21 +193,21 @@ public class PlateauColorLines extends Plateau {
     }
 
 
-    public boolean alignementDiagonal2(Case c){
-        int x = c.getX();
-        int y = c.getY();
-        int cmp = 0;
+    public boolean alignementDiagonal2(Case c) {
+        int x = c.getX();                                                                                           //  _____________________
+        int y = c.getY();                                                                                           //  |___|___|___|___| / |
+        int cmp = 0;                                                                                                //  |___|___|___| / |___|
         boolean b = false;
         String couleur = cases[x][y].getPion().toString();
-        Case curseur = null;
-        while(x < cases.length && y >= 0){
+        Case curseur = null;                                                                                        //  |___| L |___|___|___|
+        while (x < cases.length && y >= 0) {                                                                          //  |___|___|___|___|___|
             curseur = cases[x][y];
             x += 1;
             y -= 1;
         }
         x = curseur.getX();
         y = curseur.getY();
-        while(x >= 0 && y < cases.length){
+        while (x >= 0 && y < cases.length) {
             curseur = cases[x][y];
             if (curseur.pion == null) {
                 cmp = 0;
@@ -240,10 +238,10 @@ public class PlateauColorLines extends Plateau {
             j1.setScore(2);
         }
 
-        if(a && b && c || a && b && d || b && c && d || a && c && d){
+        if (a && b && c || a && b && d || b && c && d || a && c && d) {
             j1.setScore(3);
         }
-        if(a && b && c && d){
+        if (a && b && c && d) {
             j1.setScore(4);
         }
     }
