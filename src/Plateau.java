@@ -84,6 +84,14 @@ public abstract class Plateau {
             else System.out.print("- ");
         }
 
+        public int getCoorX(){
+            return this.x;
+        }
+
+        public int getCoorY(){
+            return this.y;
+        }
+
         public Pion getPion() {
             return pion;
         }
@@ -106,13 +114,12 @@ public abstract class Plateau {
     }
     public abstract void afficherScore();
     public abstract Case[][] getCases();
-    public abstract void jouer(String s);
-    public abstract int[] robot();
     public int getLongueur(){
         return longueur;
     }
     public int getLargeur(){
         return largeur;
     }
-
+    public abstract Joueur getJoueur(String j);
+    public abstract boolean alignement(Case cas);
 }

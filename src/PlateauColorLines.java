@@ -18,12 +18,6 @@ public class PlateauColorLines extends Plateau {
         super(dimension);
     }
 
-
-    @Override
-    public int[] robot() {
-        return new int[0];
-    }
-
     public void putThreeColors() {
         int cmp = 0;
         while (cmp != 3) {
@@ -298,7 +292,7 @@ public class PlateauColorLines extends Plateau {
         return (b);
     }
 
-    public void alignement(Case cas) {
+    public boolean alignement(Case cas) {
         boolean a = alignementVertical(cas);
         boolean b = alignementHorizontal(cas);
         boolean c = alignementDiagonal1(cas);
@@ -317,6 +311,7 @@ public class PlateauColorLines extends Plateau {
         if (a || b || c || d) {
             cas.pion = null;
         }
+        return a||b||c||d;
     }
 
     public void suppressionDesPionsVertical(int debut, int fin, int y, Case c) {
@@ -373,14 +368,7 @@ public class PlateauColorLines extends Plateau {
     }
 
     @Override
-    public void jouer(String s) {
-        switch (s) {
-            case "classique":
-                this.putThreeColors();
-                this.afficher();
-                this.launch();
-                break;
-        }
+    public Joueur getJoueur(String j) {
+        return null;
     }
-
 }

@@ -11,14 +11,11 @@ public class Launcher {
     }
 
     private void userExperience(){
-        System.out.println("Bienvenue!");
-        System.out.println("Veuillez entrer la dimension du plateau: (Un entier supérieur ou égal à 5)");
-        int dimension = new Scanner(System.in).nextInt();
-        System.out.println("Which Game do you want to play ?");
-        System.out.println("a) I want to Play Gomoku !");
-        System.out.println("b) I want to play ColorLines !");
-        String s = new Scanner(System.in).nextLine();
-        if(s.equals("a") || s.equals("A")){
+        int dimension = Integer.parseInt(JOptionPane.showInputDialog("Welcome please enter the dimension of the board"));
+        JFrame frame = new JFrame("Game Selector");
+        String[] games = {"Gomoku","ColorLines"};
+        String s = (String) JOptionPane.showInputDialog(frame,"What game do you wanna Play","Games",JOptionPane.QUESTION_MESSAGE,null,games,games[0]);
+        if(s.equals("Gomoku")){
             GomokuLaunch(dimension);
         }else{
             ColorLinesLaunch(dimension);
@@ -35,18 +32,17 @@ public class Launcher {
             System.out.print("Pseudo joueur: ");
             res = sc.nextLine();
             j = new JeuGraphiqueGomoku(new PlateauGomoku(dimension, new JoueurGomoku(res, "blanc", dimension), new JoueurGomoku("Robot", "noir", dimension)));
+            j.jouer("robot");
             //p = new PlateauGomoku(dimension, new JoueurGomoku(res, "blanc", dimension), new JoueurGomoku("Robot", "noir", dimension));
-            JFrame f = new JFrame("ChessChamp");
-            f.add(j.getVue().getGui());
-            f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            f.setLocationByPlatform(true);
+            //f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            //f.setLocationByPlatform(true);
 
             // ensures the frame is the minimum size it needs to be
             // in order display the components within it
-            f.pack();
+            //f.pack();
             // ensures the minimum size is enforced.
-            f.setMinimumSize(f.getSize());
-            f.setVisible(true);
+            //f.setMinimumSize(f.getSize());
+            //f.setVisible(true);
             /*j.getPlateau().initializeThePlate();
             j.getPlateau().afficher();
             j.getPlateau().jouer("robot");*/
@@ -60,7 +56,7 @@ public class Launcher {
            // p = new PlateauGomoku(dimension,a,b);
             j = new JeuGraphiqueGomoku(new PlateauGomoku(dimension, a, b));
             j.getPlateau().initializeThePlate();
-            j.getPlateau().jouer("humain");
+            //j.getPlateau().jouer("humain");
         }
     }
 
@@ -69,7 +65,7 @@ public class Launcher {
         //Plateau p = new PlateauColorLines(dimension, new JoueurColorLines("Nabil"));
         JeuGraphique j = new JeuGraphiqueColorLines(new PlateauColorLines(dimension, new JoueurColorLines("Nabil")));
         j.getPlateau().initializeThePlate();
-        while(!j.getPlateau().isFull()) j.getPlateau().jouer("classique");
+        //while(!j.getPlateau().isFull()) j.getPlateau().jouer("classique");
     }
 
     public static void main(String [] args) {

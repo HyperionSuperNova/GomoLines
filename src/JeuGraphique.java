@@ -1,89 +1,130 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.event.MouseInputListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by merat on 15/12/16.
  */
-public abstract class JeuGraphique extends JFrame{
+public abstract class JeuGraphique{
     Plateau p;
     Vue v;
     Controleur c;
 
-    public JeuGraphique(Plateau p){
+    public JeuGraphique(Plateau p) {
         this.p = p;
-        v = new Vue();
+        this.v = new Vue();
+        this.c = new Controleur();
     }
 
-    public Plateau getPlateau(){
+    public Plateau getPlateau() {
         return p;
     }
 
-    public Vue getVue(){
+    public abstract void maj(int x, int y);
+    public abstract void jouer(String s);
+
+    public Vue getVue() {
         return v;
     }
 
-    class Vue extends JFrame{
-        private  JPanel gui = new JPanel(new BorderLayout(0,0));
-        //private final Plateau.Case[][] cases = new Plateau.Case[p.getLongueur()][p.getLongueur()];
+    class Vue extends JFrame {
+        private JPanel gui = new JPanel(new BorderLayout(0, 0));
         private JPanel plateau;
-        private final JLabel message = new JLabel("Game is ready to play!");
-
-        public Vue(){
+        private JLabel message = new JLabel("Game is ready to play!");
+        public JLabel score = new JLabel("Score J1: " + 0 + "  " + "Score J2: " + 0);
+        public Vue() {
             gui.setBorder(new EmptyBorder(5, 5, 5, 5));
             JToolBar tools = new JToolBar();
             tools.setFloatable(false);
-            tools.add(new JButton("Gomoku")); // TODO - add functionality!
-            tools.add(new JButton("ColorLines")); // TODO - add functionality!
             tools.add(message);
+            tools.add(score);
             tools.setVisible(true);
             gui.add(tools, BorderLayout.PAGE_START);
 
             plateau = new JPanel(new GridLayout(0, p.getLongueur()));
-            plateau.setSize(p.getLongueur()*64,p.getLargeur()*64);
+            plateau.setSize(p.getLongueur() * 64, p.getLargeur() * 64);
+            gui.setSize(plateau.getWidth(), plateau.getHeight());
             gui.add(plateau);
-            for(int i = 0; i < p.getCases().length; i++){
-                for(int j = 0; j < p.getCases()[i].length; j++){
-                    p.getCases()[i][j] = p.new Case(i,j,null);
-                    p.getCases()[i][j].addMouseListener(c);
+            Insets buttonMargin = new Insets(0, 0, 0, 0);
+            for (int i = 0; i < p.getCases().length; i++) {
+                for (int j = 0; j < p.getCases()[i].length; j++) {
+                    p.cases[i][j] = p.new Case(i, j, null);
+                    p.cases[i][j].setMargin(buttonMargin);
+                    p.cases[i][j].setPreferredSize(new Dimension(40,40));
+                    if ((j % 2 == 1 && i % 2 == 1) || (j % 2 == 0 && i % 2 == 0)) {
+                        p.cases[i][j].setBackground(Color.WHITE);
+                    } else {
+                        p.cases[i][j].setBackground(Color.BLACK);
+                    }
+                    p.cases[i][j].addMouseListener(new Controleur());
+                    plateau.add(p.cases[i][j]);
                 }
             }
 
-            // create the chess board squares
-            Insets buttonMargin = new Insets(0,0,0,0);
-            for (int i = 0; i < p.getCases().length; i++) {
-                for (int j = 0; j < p.getCases()[i].length; j++) {
-                    Plateau.Case b = p.new Case(i,j);
-                    b.setMargin(buttonMargin);
-                    // our chess pieces are 64x64 px in size, so we'll
-                    // 'fill this in' using a transparent icon..
-                    ImageIcon icon = new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB));
-                    b.setIcon(icon);
-                    if ((j % 2 == 1 && i % 2 == 1) || (j % 2 == 0 && i % 2 == 0)) {
-                        b.setBackground(Color.WHITE);
-                    } else {
-                        b.setBackground(Color.BLACK);
-                    }
-                    p.getCases()[j][i] = b;
-                }
-            }
-            // fill the black non-pawn piece row
-            for (int i = 0; i < p.getLongueur(); i++) {
-                for (int j = 0; j < p.getLongueur(); j++) {
-                            plateau.add(p.getCases()[j][i]);
-                }
-            }
-            gui.setSize(plateau.getWidth(), plateau.getHeight());
+            this.add(gui);
+            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            this.setLocationByPlatform(true);
+            this.pack();
+            this.setMinimumSize(this.getSize());
+            this.setMaximumSize(new Dimension(1024,768));
+            this.setVisible(true);
         }
+
         public final JComponent getGui() {
             return gui;
         }
     }
 
-     abstract class Controleur implements MouseInputListener{
+    class Controleur implements ActionListener,MouseInputListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            for(int i = 0; i < p.cases.length;i++){
+                for(int j = 0; j < p.cases[i].length;j++){
+                    if(e.getSource() == p.cases[i][j]){
+                        maj(i,j);
+                    }
+                }
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseMoved(MouseEvent e) {
+
+        }
     }
 }
