@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 /**
  * Created by Stryker on 28/11/2016.
  */
@@ -61,7 +63,7 @@ public abstract class Plateau {
         }
     }
 
-    class Case {
+    class Case extends JButton {
         public int x;
         public int y;
         public Pion pion;
@@ -80,14 +82,6 @@ public abstract class Plateau {
         public void afficher(){
             if(!isEmpty()) pion.afficher();
             else System.out.print("- ");
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
         }
 
         public Pion getPion() {
@@ -114,5 +108,11 @@ public abstract class Plateau {
     public abstract Case[][] getCases();
     public abstract void jouer(String s);
     public abstract int[] robot();
+    public int getLongueur(){
+        return longueur;
+    }
+    public int getLargeur(){
+        return largeur;
+    }
 
 }
