@@ -12,7 +12,7 @@ import java.awt.event.MouseMotionListener;
  * Created by merat on 15/12/16.
  */
 public abstract class JeuGraphique {
-    private static int turncounter = 0;
+    protected static int turncounter = 0;
     protected static int[] tabsave = new int[2];
     Plateau p;
     Vue v;
@@ -29,14 +29,13 @@ public abstract class JeuGraphique {
     }
 
     public void endGame() {
-        if(p.isFull()){
-            try{
-                showScore();
-                v.dispose();
-            }catch(Exception e){
-                System.out.println(e.getMessage());
-            }
+        try {
+            showScore();
+            v.dispose();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
+
     }
 
     public abstract void maj(int x, int y);
@@ -54,7 +53,7 @@ public abstract class JeuGraphique {
     class Vue extends JFrame {
         private JPanel gui = new JPanel(new BorderLayout(0, 0));
         private JPanel plateau;
-        private JLabel message = new JLabel("Game is ready to play!");
+        private JLabel message = new JLabel("Click where you want to take your pawn");
         private JLabel score = new JLabel(" Score J1 " + 0);
         JToolBar tools = new JToolBar();
 
@@ -121,14 +120,14 @@ public abstract class JeuGraphique {
                         maj(i, j);
                         turnShow();
                     } else if (e.getSource() == p.cases[i][j] && p instanceof PlateauColorLines) {
-                        if (turncounter % 2 == 0) {
+                        if (turncounter % 2 == 0 && !p.cases[i][j].isEmpty()) {
                             tabsave[0] = i;
                             tabsave[1] = j;
-                            v.setMessage("Click on where you want to put your piece");
+                            v.setMessage("Click where you want to drop it");
                             turncounter++;
                         } else {
                             maj(i, j);
-                            v.setMessage("The piece has been dropped");
+                            v.setMessage("Click where you want to take your pawn");
                             turncounter++;
                         }
                     }

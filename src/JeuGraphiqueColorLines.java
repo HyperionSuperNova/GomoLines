@@ -21,40 +21,49 @@ public class JeuGraphiqueColorLines extends JeuGraphique {
 
     public void putThreeColors() {
         int cmp = 0;
-        while (cmp != 3 && !p.isFull()) {
-            int a = new Random().nextInt(p.longueur);
-            int b = new Random().nextInt(p.largeur);
-            while (!p.cases[a][b].isEmpty() && !p.isFull()) {
-                a = new Random().nextInt(p.longueur);
-                b = new Random().nextInt(p.largeur);
+        while (cmp != 3) {
+            if (!p.isFull()) {
+                int a = new Random().nextInt(p.longueur);
+                int b = new Random().nextInt(p.largeur);
+                while (!p.cases[a][b].isEmpty()) {
+                    a = new Random().nextInt(p.longueur);
+                    b = new Random().nextInt(p.largeur);
+                }
+                p.cases[a][b].pion = new PionColorLines();
+                try {
+                    this.p.cases[a][b].setIcon(new ImageIcon(fabriqueimg(p.cases[a][b].pion)));
+                } catch (Exception ex) {
+                    System.out.println(ex);
+                }
+                cmp++;
+            } else {
+                cmp = 3;
+                endGame();
             }
-            p.cases[a][b].pion = new PionColorLines();
-            try {
-                this.p.cases[a][b].setIcon(new ImageIcon(fabriqueimg(p.cases[a][b].pion)));
-            } catch (Exception ex) {
-                System.out.println(ex);
-            }
-            cmp++;
         }
     }
 
-
     @Override
     public void maj(int x, int y) {
-        p.cases[x][y].fabrique(p.cases[tabsave[0]][tabsave[1]].pion.toString());
-        p.cases[tabsave[0]][tabsave[1]].pion = null;
-        p.cases[tabsave[0]][tabsave[1]].setIcon(null);
-        try {
-            p.cases[x][y].setIcon(new ImageIcon(fabriqueimg(p.cases[x][y].pion)));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        if(p.cases[x][y].isEmpty() && !p.cases[tabsave[0]][tabsave[1]].isEmpty()) {
+            p.cases[x][y].fabrique(p.cases[tabsave[0]][tabsave[1]].pion.toString());
+            p.cases[tabsave[0]][tabsave[1]].pion = null;
+            p.cases[tabsave[0]][tabsave[1]].setIcon(null);
+            try {
+                p.cases[x][y].setIcon(new ImageIcon(fabriqueimg(p.cases[x][y].pion)));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            System.out.println(p.cases[x][y] == null);
+            p.alignement(p.cases[x][y]);
+            v.setScore("  " + "Score" + " " + joue.getPseudo() + ":  " + joue.getScore());
+            v.repaint();
+            putThreeColors();
+            v.setMessage("The piece has been dropped");
+            turncounter++;
+        }else{
+            v.setMessage("Select a new pawn and put it elsewhere");
         }
-        System.out.println(p.cases[x][y].pion == null);
-        p.alignement(p.cases[x][y]);
-        v.setScore("  " + "Score" + " " + joue.getPseudo() + ":  " + joue.getScore());
-        v.repaint();
-        putThreeColors();
-        endGame();
     }
 
 
@@ -77,10 +86,10 @@ public class JeuGraphiqueColorLines extends JeuGraphique {
         return null;
     }
 
-    public void pawnEraser(){
-        for(int i = 0; i < p.cases.length;i++){
-            for(int j = 0; j < p.cases[i].length;j++){
-                if(p.cases[i][j].pion == null){
+    public void pawnEraser() {
+        for (int i = 0; i < p.cases.length; i++) {
+            for (int j = 0; j < p.cases[i].length; j++) {
+                if (p.cases[i][j].pion == null) {
                     p.cases[i][j].setIcon(null);
                 }
             }
@@ -94,9 +103,6 @@ public class JeuGraphiqueColorLines extends JeuGraphique {
             case "classique":
                 this.game = s;
                 break;
-            case "variante":
-                this.game =s;
-                break;
         }
     }
 
@@ -107,6 +113,8 @@ public class JeuGraphiqueColorLines extends JeuGraphique {
 
     @Override
     public void showScore() {
+        JFrame frame = new JFrame();
         String j1 = "Score de " + joue.getPseudo() + ": " + joue.getScore();
+        JOptionPane.showMessageDialog(frame, j1);
     }
 }
