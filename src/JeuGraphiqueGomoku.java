@@ -62,14 +62,7 @@ public class JeuGraphiqueGomoku extends JeuGraphique {
                 majr();
             }
             v.setScore("  " + "Score" + " " + a.getPseudo() + ":  " + a.getScore() + " " + "Score " + b.getPseudo() + ": " + b.getScore());
-            if(p.isFull()){
-                try{
-                    showScore();
-                    v.dispose();
-                }catch(Exception e){
-                    System.out.println(e.getMessage());
-                }
-            }
+            endGame();
     }
 
     private void maj1(int x, int y){

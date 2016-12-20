@@ -21,7 +21,7 @@ public class JoueurColorLines extends Joueur{
 
     @Override
     public String getPseudo() {
-        return null;
+        return pseudo;
     }
 
     @Override
