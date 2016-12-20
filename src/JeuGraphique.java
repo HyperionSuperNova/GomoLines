@@ -6,11 +6,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 /**
  * Created by merat on 15/12/16.
  */
 public abstract class JeuGraphique{
+    private static int turncounter = 0;
+    protected static int[] tabsave = new int[2];
     Plateau p;
     Vue v;
     Controleur c;
@@ -89,7 +92,7 @@ public abstract class JeuGraphique{
         }
     }
 
-    class Controleur implements ActionListener,MouseInputListener {
+    class Controleur implements ActionListener,MouseInputListener,MouseMotionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -99,9 +102,20 @@ public abstract class JeuGraphique{
         public void mouseClicked(MouseEvent e) {
             for(int i = 0; i < p.cases.length;i++){
                 for(int j = 0; j < p.cases[i].length;j++){
-                    if(e.getSource() == p.cases[i][j]){
+                    if(e.getSource() == p.cases[i][j] && p instanceof PlateauGomoku){
                         maj(i,j);
                         turnShow();
+                    }else if(e.getSource() == p.cases[i][j] && p instanceof PlateauColorLines){
+                        if(turncounter % 2 == 0){
+                            tabsave[0] = i;
+                            tabsave[1] = j;
+                            v.setMessage("Click on where you want to put your piece");
+                            turncounter++;
+                        }else{
+                            maj(i,j);
+                            v.setMessage("The piece has been dropped");
+                            turncounter ++;
+                        }
                     }
                 }
             }

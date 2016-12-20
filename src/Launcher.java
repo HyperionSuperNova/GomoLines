@@ -41,11 +41,8 @@ public class Launcher {
     }
 
     public void ColorLinesLaunch(int dimension){
-        System.out.println("lel");
-        //Plateau p = new PlateauColorLines(dimension, new JoueurColorLines("Nabil"));
         JeuGraphique j = new JeuGraphiqueColorLines(new PlateauColorLines(dimension, new JoueurColorLines("Nabil")));
-        j.getPlateau().initializeThePlate();
-        //while(!j.getPlateau().isFull()) j.getPlateau().jouer("classique");
+
     }
 
     public static void main(String [] args) {

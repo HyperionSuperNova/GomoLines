@@ -16,6 +16,7 @@ public class PlateauColorLines extends Plateau {
 
     public PlateauColorLines(int dimension) {
         super(dimension);
+        initializeThePlate();
     }
 
     public void putThreeColors() {
@@ -45,7 +46,7 @@ public class PlateauColorLines extends Plateau {
             System.out.println("Ou souhaitez vous déplacer le pion ?");
             String[] z = new Scanner(System.in).nextLine().split(",");
             faire(Integer.parseInt(z[0]), Integer.parseInt(z[1]), cases[a][b]);
-            afficherScore();
+
         }
     }
 
@@ -355,11 +356,6 @@ public class PlateauColorLines extends Plateau {
             deb1--;
             deb2++;
         }
-    }
-
-    @Override
-    public void afficherScore() {
-        System.out.println("Score du joueur: " + j1.getScore());
     }
 
     @Override

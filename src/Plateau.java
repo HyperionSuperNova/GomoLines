@@ -112,7 +112,6 @@ public abstract class Plateau {
             return pion == null;
         }
     }
-    public abstract void afficherScore();
     public abstract Case[][] getCases();
     public int getLongueur(){
         return longueur;

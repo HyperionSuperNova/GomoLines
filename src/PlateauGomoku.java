@@ -119,16 +119,6 @@ public class PlateauGomoku extends Plateau {
         return (cmp >= 5 && b);
     }
 
-
-    public void afficherScore() {
-        System.out.println("Score de " + blanc.getPseudo() + ": " + blanc.getScore());
-        System.out.println("Score de " + noir.getPseudo() + ": " + noir.getScore());
-        if (noir.getScore() > blanc.getScore()) System.out.println(noir.getPseudo() + " a gagné!");
-        else if (noir.getScore() < blanc.getScore()) System.out.println(blanc.getPseudo() + " a gagné!");
-        else System.out.println("Match nul!");
-    }
-
-
     @Override
     public Joueur getJoueur(String j) {
         Joueur z = null;
