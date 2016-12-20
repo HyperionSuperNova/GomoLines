@@ -20,4 +20,14 @@ public class JeuGraphiqueColorLines extends JeuGraphique {
     public void jouer(String s) {
 
     }
+
+    @Override
+    public void turnShow() {
+
+    }
+
+    @Override
+    public void showScore() {
+
+    }
 }

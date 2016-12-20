@@ -11,8 +11,8 @@ public class Launcher {
     }
 
     private void userExperience(){
-        int dimension = Integer.parseInt(JOptionPane.showInputDialog("Welcome please enter the dimension of the board"));
-        JFrame frame = new JFrame("Game Selector");
+        JFrame frame = new JFrame("Game Menu");
+        int dimension = Integer.parseInt(JOptionPane.showInputDialog(frame,"Welcome please enter the dimension of the board"));
         String[] games = {"Gomoku","ColorLines"};
         String s = (String) JOptionPane.showInputDialog(frame,"What game do you wanna Play","Games",JOptionPane.QUESTION_MESSAGE,null,games,games[0]);
         if(s.equals("Gomoku")){
@@ -23,40 +23,20 @@ public class Launcher {
     }
 
     public void GomokuLaunch(int dimension){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Voulez-vous jouer avec un robot?");
-        String res = sc.nextLine().toLowerCase();
-        //Plateau p = null;
+        JFrame frame = new JFrame("Game Choices");
+        String[] choice = {"yes","no"};
+        String res = (String) JOptionPane.showInputDialog(frame,"Do you wanna play with a robot ?","Choices",JOptionPane.QUESTION_MESSAGE,null,choice,choice[0]);
         JeuGraphique j = null;
-        if (res.equals("oui")) {
-            System.out.print("Pseudo joueur: ");
-            res = sc.nextLine();
+        if (res.equals("yes")) {
+            res = JOptionPane.showInputDialog("What's your name ?");
             j = new JeuGraphiqueGomoku(new PlateauGomoku(dimension, new JoueurGomoku(res, "blanc", dimension), new JoueurGomoku("Robot", "noir", dimension)));
             j.jouer("robot");
-            //p = new PlateauGomoku(dimension, new JoueurGomoku(res, "blanc", dimension), new JoueurGomoku("Robot", "noir", dimension));
-            //f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            //f.setLocationByPlatform(true);
-
-            // ensures the frame is the minimum size it needs to be
-            // in order display the components within it
-            //f.pack();
-            // ensures the minimum size is enforced.
-            //f.setMinimumSize(f.getSize());
-            //f.setVisible(true);
-            /*j.getPlateau().initializeThePlate();
-            j.getPlateau().afficher();
-            j.getPlateau().jouer("robot");*/
-        }else if (res.equals("non")) {
-            System.out.print("Pseudo premier joueur :");
-            res = sc.nextLine();
-            JoueurGomoku a = new JoueurGomoku(res,"blanc",dimension);
-            System.out.print("Pseudo deuxième joueur: ");
-            res = sc.nextLine();
-            JoueurGomoku b = new JoueurGomoku(res,"noir",dimension);
-           // p = new PlateauGomoku(dimension,a,b);
-            j = new JeuGraphiqueGomoku(new PlateauGomoku(dimension, a, b));
-            j.getPlateau().initializeThePlate();
-            //j.getPlateau().jouer("humain");
+        }else{
+            res = JOptionPane.showInputDialog("What's the name of the first player ?");
+            String j2 = JOptionPane.showInputDialog("What's the name of the second player ?");
+            j = new JeuGraphiqueGomoku(new PlateauGomoku(dimension, new JoueurGomoku(res, "blanc", dimension), new JoueurGomoku(j2, "noir", dimension)));
+            j.v.setTitle("2 Player Gomoku");
+            j.jouer("humain");
         }
     }
 

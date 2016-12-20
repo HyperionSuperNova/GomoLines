@@ -134,13 +134,10 @@ public class PlateauGomoku extends Plateau {
         Joueur z = null;
         switch(j){
             case "blanc":
-                z = blanc;
+                z = this.blanc;
                 break;
             case "noir":
-                z = noir;
-                break;
-            default:
-                z = null;
+                z = this.noir;
                 break;
         }
         return z;

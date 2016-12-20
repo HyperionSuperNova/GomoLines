@@ -27,6 +27,8 @@ public abstract class JeuGraphique{
 
     public abstract void maj(int x, int y);
     public abstract void jouer(String s);
+    public abstract void turnShow();
+    public abstract void showScore();
 
     public Vue getVue() {
         return v;
@@ -36,17 +38,16 @@ public abstract class JeuGraphique{
         private JPanel gui = new JPanel(new BorderLayout(0, 0));
         private JPanel plateau;
         private JLabel message = new JLabel("Game is ready to play!");
-        public JLabel score = new JLabel("Score J1: " + 0 + "  " + "Score J2: " + 0);
+        private JLabel score = new JLabel(" Score J1 " + 0);
+        JToolBar tools = new JToolBar();
         public Vue() {
             gui.setBorder(new EmptyBorder(5, 5, 5, 5));
-            JToolBar tools = new JToolBar();
             tools.setFloatable(false);
             tools.add(message);
-            tools.add(score);
             tools.setVisible(true);
             gui.add(tools, BorderLayout.PAGE_START);
-
-            plateau = new JPanel(new GridLayout(0, p.getLongueur()));
+            tools.add(score);
+            plateau = new JPanel(new GridLayout(p.getLargeur(), p.getLongueur()));
             plateau.setSize(p.getLongueur() * 64, p.getLargeur() * 64);
             gui.setSize(plateau.getWidth(), plateau.getHeight());
             gui.add(plateau);
@@ -78,6 +79,14 @@ public abstract class JeuGraphique{
         public final JComponent getGui() {
             return gui;
         }
+
+        public void setScore(String a){
+            score.setText(a);
+        }
+
+        public void setMessage(String a){
+            message.setText(a);
+        }
     }
 
     class Controleur implements ActionListener,MouseInputListener {
@@ -92,6 +101,7 @@ public abstract class JeuGraphique{
                 for(int j = 0; j < p.cases[i].length;j++){
                     if(e.getSource() == p.cases[i][j]){
                         maj(i,j);
+                        turnShow();
                     }
                 }
             }

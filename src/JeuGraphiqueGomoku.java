@@ -9,13 +9,15 @@ import java.awt.image.BufferedImage;
  * Created by merat on 15/12/16.
  */
 public class JeuGraphiqueGomoku extends JeuGraphique {
-
+    Joueur a = p.getJoueur("blanc");
+    Joueur b = p.getJoueur("noir");
     public JeuGraphiqueGomoku(PlateauGomoku gomoku) {
         super(gomoku);
+        turnShow();
+        v.setScore("  " + "Score" + " " + a.getPseudo() + ":  " + a.getScore() + " " + "Score " + b.getPseudo() + ": " + b.getScore());
     }
-
     String game;
-
+    private static int turn = 0;
     public void jouer(String s) {
         this.game = s;
     }
@@ -24,12 +26,53 @@ public class JeuGraphiqueGomoku extends JeuGraphique {
         if(p.alignement(cas)){
             j.setScore(1);
         }
-        //v.score = new JLabel("Score J1:" + p.getJoueur("blanc").getScore() + " Score J2:" + p.getJoueur("noire").getScore());
     }
 
+    @Override
+    public void turnShow(){
+        if(turn % 2 == 0) v.setMessage("Tour de: " + p.getJoueur("blanc").getPseudo());
+        else v.setMessage("Tour de: " + p.getJoueur("noir").getPseudo());
+    }
 
+    @Override
+    public void showScore(){
+        JFrame frame = new JFrame();
+        String j1 = "Score de " + a.getPseudo() + ": " + a.getScore();
+        String j2 = "Score de " + b.getPseudo() + ": " + b.getScore();
+        String winner = "";
+        if (b.getScore() > a.getScore()) winner = b.getPseudo() + " a gagné!";
+        else if (a.getScore() == b.getScore()) winner = "Match nul";
+        else winner = a.getPseudo() + " a gagné";
+        JOptionPane.showMessageDialog(frame, j1 + "\n\n" + j2 + "\n\n" + winner);
+    }
+
+    @Override
     public void maj(int x, int y) {
-        //this.p.cases[x][y].setBackground(Color.RED);
+        if (this.turn % 2 != 0 && !this.game.equals("robot")) {
+                maj2(x, y);
+            } else if (this.game.equals("robot") && this.turn % 2 != 0) {
+                majr();
+            } else {
+                maj1(x, y);
+            }
+
+            if (p.isFull()) {
+                System.out.println("yolo");
+            } else if (this.game.equals("robot")) {
+                majr();
+            }
+            v.setScore("  " + "Score" + " " + a.getPseudo() + ":  " + a.getScore() + " " + "Score " + b.getPseudo() + ": " + b.getScore());
+            if(p.isFull()){
+                try{
+                    showScore();
+                    v.dispose();
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                }
+            }
+    }
+
+    private void maj1(int x, int y){
         if (p.cases[x][y].isEmpty()) {
             try {
                 Image img = ImageIO.read(getClass().getResource("PionBlanc.png"));
@@ -42,17 +85,25 @@ public class JeuGraphiqueGomoku extends JeuGraphique {
             this.p.cases[x][y].fabrique("blanc");
             this.alignement(p.cases[x][y],p.getJoueur("blanc"));
         }
+        turn++;
         v.repaint();
-        if (p.isFull()) {
-            System.out.println("yolo");
-        } else if(this.game.equals("robot")) {
-            majr();
-        }else{
-            maj2();
-        }
     }
 
-    private void maj2() {
+    private void maj2(int x,int y) {
+        if (p.cases[x][y].isEmpty()) {
+            try {
+                Image img = ImageIO.read(getClass().getResource("PionNoir.png"));
+                this.p.cases[x][y].setIcon(new ImageIcon(img));
+
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+
+            this.p.cases[x][y].fabrique("noir");
+            this.alignement(p.cases[x][y],p.getJoueur("noir"));
+            turn++;
+        }
+
     }
 
 
@@ -71,14 +122,7 @@ public class JeuGraphiqueGomoku extends JeuGraphique {
         } catch (Exception ex) {
             System.out.println(ex);
         }
+        turn++;
         v.repaint();
     }
-
-
-    /*public void setIcon(int x,int y){
-        p.cases[x][y].setBackground(Color.CYAN);
-        p.cases[x][y].repaint();
-        this.repaint();
-    }*/
-
 }
