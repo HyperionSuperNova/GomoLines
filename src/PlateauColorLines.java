@@ -173,7 +173,6 @@ public class PlateauColorLines extends Plateau {
             if (cmp >= 5) {
                 j1.setScore(cmp % 4);
                 b = true;
-                System.out.println("deb: "+(i+(1-cmp))+"fin: "+curs+"y: "+y);
                 suppressionDesPionsHorizontal(i + (1 - cmp), curs, x, c);
             }
             i++;
@@ -319,7 +318,6 @@ public class PlateauColorLines extends Plateau {
     public void suppressionDesPionsVertical(int debut, int fin, int y, Case c) {
         int i = debut;
         while (i < fin) {
-            System.out.println(debut+" "+i);
             if (cases[i][y] != c) {
                 cases[i][y].pion = null;
                 cases[i][y].setIcon(null);
@@ -332,8 +330,6 @@ public class PlateauColorLines extends Plateau {
         int i = debut;
         while (i <= fin) {
             if (cases[x][i] != c) {
-                System.out.println("LEL");
-                System.out.println("x: "+x+" y: "+i);
                 cases[x][i].pion = null;
                 cases[x][i].setIcon(null);
             }

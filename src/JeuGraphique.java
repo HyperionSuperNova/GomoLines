@@ -128,7 +128,6 @@ public abstract class JeuGraphique {
                         } else {
                             maj(i, j);
                             v.setMessage("Click where you want to take your pawn");
-                            turncounter++;
                         }
                     }
                 }
