@@ -67,11 +67,13 @@ public abstract class Plateau {
         public int x;
         public int y;
         public Pion pion;
+        public boolean passage;
 
         public Case(int x, int y){
             this.x = x;
             this.y = y;
             this.pion = null;
+            this.passage = false;
         }
 
         public Case(int x, int y, Pion p){
@@ -84,13 +86,13 @@ public abstract class Plateau {
             else System.out.print("- ");
         }
 
-        public int getCoorX(){
+        /*public int getCoorX(){
             return this.x;
         }
 
         public int getCoorY(){
             return this.y;
-        }
+        }*/
 
         public Pion getPion() {
             return pion;
@@ -110,6 +112,10 @@ public abstract class Plateau {
 
         public boolean isEmpty(){
             return pion == null;
+        }
+
+        public void setPassage(boolean b){
+            this.passage = b;
         }
     }
     public abstract Case[][] getCases();

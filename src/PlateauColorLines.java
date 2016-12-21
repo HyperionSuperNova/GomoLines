@@ -96,13 +96,13 @@ public class PlateauColorLines extends Plateau {
 
     public boolean alignementVertical(Case c) {
         int cmp = 0;
-        int x = c.getX();
-        int y = c.getY();
+        int x = c.x;
+        int y = c.y;
         boolean b = false;
         boolean croisement = false;
         Case curseur;
         int curs = 0;
-        String couleur = cases[x][y].getPion().toString();
+        String couleur = cases[x][y].pion.toString();
         int i = 0;
         int arc = 0;
         while (i < this.longueur) {
@@ -111,7 +111,7 @@ public class PlateauColorLines extends Plateau {
                 cmp = 0;
             } else {
                 if (!curseur.pion.toString().equals("arcenciel") && !croisement) {
-                    couleur = curseur.getPion().toString();
+                    couleur = curseur.pion.toString();
                     croisement = true;
                 }
                 if(curseur.pion.toString().equals("arcenciel")){
@@ -119,7 +119,7 @@ public class PlateauColorLines extends Plateau {
                 }
                 if (couleur.equals(curseur.pion.toString())  || curseur.pion.toString().equals("arcenciel")) {
                     cmp++;
-                    curs = curseur.getX();
+                    curs = curseur.x;
                 } else {
                     croisement = false;
                     cmp = arc;
@@ -139,22 +139,22 @@ public class PlateauColorLines extends Plateau {
 
     public boolean alignementHorizontal(Case c) {
         int cmp = 0;
-        int x = c.getX();
-        int y = c.getY();
+        int x = c.x;
+        int y = c.y;
         int arc = 0;
         boolean b = false;
         boolean croisement = false;
         Case curseur;
         int curs = 0; // j'ai laissé curs car lorsque je fais curs+i ca me fait une grosse erreur de sa mére la pute comme tu dis si bien.
         int i = 0;
-        String couleur = cases[x][y].getPion().toString();
+        String couleur = cases[x][y].pion.toString();
         while (i < this.largeur) {
             curseur = cases[x][i];
             if (curseur.pion == null) {
                 cmp = 0;
             } else {
                 if (!curseur.pion.toString().equals("arcenciel") && !croisement) {
-                    couleur = curseur.getPion().toString();
+                    couleur = curseur.pion.toString();
                     croisement = true;
                 }
                 if(curseur.pion.toString().equals("arcenciel")){
@@ -162,7 +162,7 @@ public class PlateauColorLines extends Plateau {
                 }
                 if (couleur.equals(curseur.pion.toString())  || curseur.pion.toString().equals("arcenciel")) {
                     cmp++;
-                    curs = curseur.getY();
+                    curs = curseur.y;
                 } else {
                     croisement = false;
                     cmp = arc;
@@ -182,13 +182,13 @@ public class PlateauColorLines extends Plateau {
     }
 
     public boolean alignementDiagonal1(Case c) {
-        int x = c.getX();
-        int y = c.getY();
+        int x = c.x;
+        int y = c.y;
         int cmp = 0;
         boolean b = false;
         boolean croisement = false;
         int arc = 0;
-        String couleur = cases[x][y].getPion().toString();
+        String couleur = cases[x][y].pion.toString();
         Case curseur = null;
         int fin1 = 0;
         int fin2 = 0;
@@ -197,17 +197,17 @@ public class PlateauColorLines extends Plateau {
             x -= 1;
             y -= 1;
         }
-        x = curseur.getX();
-        y = curseur.getY();
-        int deb1 = curseur.getX();
-        int deb2 = curseur.getY();
+        x = curseur.x;
+        y = curseur.y;
+        int deb1 = curseur.x;
+        int deb2 = curseur.y;
         while (x < cases.length && y < cases.length) {
             curseur = cases[x][y];
             if (curseur.pion == null) {
                 cmp = 0;
             } else {
                 if (!curseur.pion.toString().equals("arcenciel") && !croisement) {
-                    couleur = curseur.getPion().toString();
+                    couleur = curseur.pion.toString();
                     croisement = true;
                 }
                 if(curseur.pion.toString().equals("arcenciel")){
@@ -215,13 +215,13 @@ public class PlateauColorLines extends Plateau {
                 }
                 if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel")) {
                     cmp++;
-                    fin1 = curseur.getX();
-                    fin2 = curseur.getY();
+                    fin1 = curseur.x;
+                    fin2 = curseur.y;
                 } else {
                     croisement = false;
                     cmp = arc;
-                    deb1 = curseur.getX()-arc;
-                    deb2 = curseur.getY()-arc;
+                    deb1 = curseur.x-arc;
+                    deb2 = curseur.y-arc;
                     arc = 0;
                     x--;
                     y--;
@@ -239,13 +239,13 @@ public class PlateauColorLines extends Plateau {
     }
 
     public boolean alignementDiagonal2(Case c) {
-        int x = c.getX();
-        int y = c.getY();
+        int x = c.x;
+        int y = c.y;
         int cmp = 0;
         boolean croisement = false;
         boolean b = false;
         int arc = 0;
-        String couleur = cases[x][y].getPion().toString();
+        String couleur = cases[x][y].pion.toString();
         Case curseur = null;
         int fin2 = 0;
         while (x < cases.length && y >= 0) {
@@ -253,17 +253,17 @@ public class PlateauColorLines extends Plateau {
             x += 1;
             y -= 1;
         }
-        x = curseur.getX();
-        y = curseur.getY();
-        int deb1 = curseur.getX();
-        int deb2 = curseur.getY();
+        x = curseur.x;
+        y = curseur.y;
+        int deb1 = curseur.x;
+        int deb2 = curseur.y;
         while (x >= 0 && y < cases.length) {
             curseur = cases[x][y];
             if (curseur.pion == null) {
                 cmp = 0;
             } else {
                 if (!curseur.pion.toString().equals("arcenciel") && !croisement) {
-                    couleur = curseur.getPion().toString();
+                    couleur = curseur.pion.toString();
                     croisement = true;
                 }
                 if(curseur.pion.toString().equals("arcenciel")){
@@ -271,12 +271,12 @@ public class PlateauColorLines extends Plateau {
                 }
                 if (couleur.equals(curseur.pion.toString()) || curseur.pion.toString().equals("arcenciel")) {
                     cmp++;
-                    fin2 = curseur.getY();
+                    fin2 = curseur.y;
                 } else {
                     croisement = false;
                     cmp = arc;
-                    deb1 = curseur.getX()+arc;
-                    deb2 = curseur.getY()-arc;
+                    deb1 = curseur.x+arc;
+                    deb2 = curseur.y-arc;
                     arc =0;
                     x++;
                     y--;
