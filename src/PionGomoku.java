@@ -19,12 +19,6 @@ public class PionGomoku extends Pion{
     }
 
     enum Couleur{BLANC, NOIR;}
-
-    public void afficher(){
-        if(this.toString().equals("BLANC")) System.out.print("B"+" ");
-        else System.out.print("N"+" ");
-    }
-
     public String toString(){
         return this.cool.name();
     }

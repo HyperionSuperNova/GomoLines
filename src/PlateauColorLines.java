@@ -19,81 +19,7 @@ public class PlateauColorLines extends Plateau {
         initializeThePlate();
     }
 
-    public void putThreeColors() {
-        int cmp = 0;
-        while (cmp != 3) {
-            int a = new Random().nextInt(longueur);
-            int b = new Random().nextInt(largeur);
-            while (!cases[a][b].isEmpty()) {
-                a = new Random().nextInt(longueur);
-                b = new Random().nextInt(largeur);
-            }
-            cases[a][b].pion = new PionColorLines();
-            cmp++;
-        }
-    }
-
-    public void launch() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Quel pion souhaitez vous déplacer ?");
-        String[] t = sc.nextLine().split(",");
-        int a = Integer.parseInt(t[0]);
-        int b = Integer.parseInt(t[1]);
-        if (cases[a][b].pion == null) {
-            System.out.println("Impossible de déplacer ce pion! La case est vide!");
-            launch();
-        } else {
-            System.out.println("Ou souhaitez vous déplacer le pion ?");
-            String[] z = new Scanner(System.in).nextLine().split(",");
-            faire(Integer.parseInt(z[0]), Integer.parseInt(z[1]), cases[a][b]);
-
-        }
-    }
-
-    protected void faire(int x, int y, Case c) {
-        if (x >= 0 && x <= cases.length && y >= 0 && y < cases.length) {
-            for (int i = 0; i < cases.length; i++) {
-                for (int j = 0; j < cases[i].length; j++) {
-                    if (x == i && y == j) {
-                        if (cases[i][j].isEmpty()) {
-                            switch (c.getPion().toString()) {
-                                case "rouge":
-                                    cases[i][j].fabrique("rouge");
-                                    break;
-                                case "vert":
-                                    cases[i][j].fabrique("vert");
-                                    break;
-                                case "bleu":
-                                    cases[i][j].fabrique("bleu");
-                                    break;
-                                case "arcenciel":
-                                    cases[i][j].fabrique("arcenciel");
-                                    break;
-                            }
-                            c.setPion(null);
-                            alignement(cases[i][j]);
-                        } else {
-                            System.out.println("Coup interdit!");
-                            System.out.println("La case n'est pas vide!");
-                            afficher();
-                            System.out.println("Veuillez rentrer à nouveau des valeurs: ");
-                            String s = new Scanner(System.in).nextLine();
-                            String[] t = s.split(",");
-                            faire(Integer.parseInt(t[0]), Integer.parseInt(t[1]), c);
-                        }
-                    }
-                }
-            }
-        } else {
-            System.out.println("Valeurs incorrectes!");
-            afficher();
-            System.out.println("Veuillez entrer à nouveau des valeurs:");
-            String s = new Scanner(System.in).nextLine();
-            String[] t = s.split(",");
-            faire(Integer.parseInt(t[0]), Integer.parseInt(t[1]), c);
-        }
-    }
-
+    // vérifie si un alignement vertical s'est créé en bougeant le pion de la case passée en argument
     public boolean alignementVertical(Case c) {
         int cmp = 0;
         int x = c.x;
@@ -137,6 +63,7 @@ public class PlateauColorLines extends Plateau {
         return (b);
     }
 
+    // vérifie si un alignement horizontal s'est créé en bougeant le pion de la case passée en argument
     public boolean alignementHorizontal(Case c) {
         int cmp = 0;
         int x = c.x;
@@ -180,6 +107,8 @@ public class PlateauColorLines extends Plateau {
         return (b);
     }
 
+    // vérifie si un alignement diagonal (en partant de la case 0,0; haut gauche et allant jusqu'à la cases n,n; bas droit)
+    // s'est créé en bougeant le pion de la case passée en argument
     public boolean alignementDiagonal1(Case c) {
         int x = c.x;
         int y = c.y;
@@ -237,6 +166,8 @@ public class PlateauColorLines extends Plateau {
         return (b);
     }
 
+    // vérifie si un alignement diagonal (en partant de la case n,0; bas gauche et allant jusqu'à la cases 0,n; haut droit)
+    // s'est créé en bougeant le pion de la case passée en argument
     public boolean alignementDiagonal2(Case c) {
         int x = c.x;
         int y = c.y;
@@ -292,6 +223,7 @@ public class PlateauColorLines extends Plateau {
         return (b);
     }
 
+    // teste si un des alignements a été réalisé. Si oui, ajoute un/des point(s) sinon ne fait rien
     public boolean alignement(Case cas) {
         boolean a = alignementVertical(cas);
         boolean b = alignementHorizontal(cas);
@@ -315,6 +247,7 @@ public class PlateauColorLines extends Plateau {
         return a||b||c||d;
     }
 
+    //si alignement Vertical il y a, alors on supprime les pions formant l'alignement
     public void suppressionDesPionsVertical(int debut, int fin, int y, Case c) {
         int i = debut;
         while (i < fin) {
@@ -326,6 +259,7 @@ public class PlateauColorLines extends Plateau {
         }
     }
 
+    //si alignement horizontal il y a, alors on supprime les pions formant l'alignement
     public void suppressionDesPionsHorizontal(int debut, int fin, int x, Case c) {
         int i = debut;
         while (i <= fin) {
@@ -337,6 +271,7 @@ public class PlateauColorLines extends Plateau {
         }
     }
 
+    //si alignement diagonal1 il y a, alors on supprime les pions formant l'alignement
     public void suppressionDesPionsDiagonaux1(int deb1, int deb2, int fin1, int fin2, Case c) {
         while (deb1 < fin1 && deb2 < fin2) {
             if (cases[deb1][deb2] != c) {
@@ -348,6 +283,7 @@ public class PlateauColorLines extends Plateau {
         }
     }
 
+    //si alignement diagonal2 il y a, alors on supprime les pions formant l'alignement
     public void suppressionDesPionsDiagonaux2(int deb1, int deb2, int fin2, Case c) {
         while (deb1 >= 0 && deb2 < fin2) {
             if (cases[deb1][deb2] != c) {
@@ -358,12 +294,6 @@ public class PlateauColorLines extends Plateau {
             deb2++;
         }
     }
-
-    @Override
-    public Case[][] getCases() {
-        return this.cases;
-    }
-
     @Override
     public Joueur getJoueur(String j) {
         return this.j1;

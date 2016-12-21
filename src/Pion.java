@@ -3,6 +3,7 @@
  */
 public abstract class Pion {
 
+    // fabrique des pions
     public static Pion factory(String s){
         switch(s){
             case "rouge":
@@ -16,7 +17,5 @@ public abstract class Pion {
         }
         return null;
     }
-
-    public abstract void afficher();
     public abstract String toString();
 }

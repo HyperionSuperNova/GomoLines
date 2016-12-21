@@ -26,24 +26,6 @@ public abstract class Plateau {
     }
 
     //Affiche le plateau et ses Pions
-    public void afficher() {
-        int cmp = 0;               //affiche le plateau
-        System.out.println();
-        for (int i = 0; i < cases.length; i++) {
-            System.out.print(cmp + "   ");
-            cmp++;
-            for (int j = 0; j < cases[i].length; j++) {
-                cases[i][j].afficher();
-            }
-            System.out.println();
-        }
-        System.out.println();
-        System.out.print("x/y ");
-        for (int i = 0; i < cases.length; i++) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
-    }
 
     //Vérifie si le plateau est plein ou non. Sert de condition d'ârret parfois
     public boolean isFull() {
@@ -67,7 +49,8 @@ public abstract class Plateau {
         public int x;
         public int y;
         public Pion pion;
-        public boolean passage;
+        public boolean passage; // cette variable va nous servir dans les alignements pour vérifier
+                                // que l'on est bien passé par la lors de la vérification des alignements
 
         public Case(int x, int y){
             this.x = x;
@@ -81,22 +64,6 @@ public abstract class Plateau {
             this.pion = p;
         }
 
-        public void afficher(){
-            if(!isEmpty()) pion.afficher();
-            else System.out.print("- ");
-        }
-
-        /*public int getCoorX(){
-            return this.x;
-        }
-
-        public int getCoorY(){
-            return this.y;
-        }*/
-
-        public Pion getPion() {
-            return pion;
-        }
 
         public void fabrique(String s) {
             this.pion = Pion.factory(s);
@@ -106,6 +73,7 @@ public abstract class Plateau {
             this.pion = a;
         }
 
+        // teste si le pion courant est le même que le pion passé en argument
         public boolean isItEquals(Pion a){
             return pion.toString().equals(a.toString());
         }
@@ -118,7 +86,9 @@ public abstract class Plateau {
             this.passage = b;
         }
     }
-    public abstract Case[][] getCases();
+    public Case[][] getCases(){
+        return cases;
+    }
     public int getLongueur(){
         return longueur;
     }

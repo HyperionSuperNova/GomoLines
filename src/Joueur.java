@@ -10,6 +10,4 @@ public abstract class Joueur {
     public abstract int getScore();
 
     public abstract String getPseudo();
-
-    public abstract String[] jouer();
 }

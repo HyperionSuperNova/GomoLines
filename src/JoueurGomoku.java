@@ -19,17 +19,6 @@ public class JoueurGomoku extends Joueur {
         }
     }
 
-    public String[] jouer(){
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Coup " + this.getPseudo() + ": ");
-        String s1 = sc.nextLine();
-        String[] t1 = s1.split(",");
-        return t1;
-    }
-
-    public Pion getPion(){
-        return this.pawns.get(0);
-    }
 
     @Override
     public void setScore(int n) {

@@ -10,6 +10,7 @@ public class Launcher {
         userExperience();
     }
 
+    // fenêtre pop-up demandant de rentrer une dimension puis à quel type de jeu on veut jouer
     private void userExperience() {
         JFrame frame = new JFrame("Game Choices");
         int dimension = Integer.parseInt(JOptionPane.showInputDialog(frame, "Welcome please enter the dimension of the board"));
@@ -22,6 +23,7 @@ public class Launcher {
         }
     }
 
+    // permet de choisir de jouer avec un robot ou non et lance le jeu + interface graphique Gomoku
     public void GomokuLaunch(int dimension) {
         JFrame frame = new JFrame("Game Type Selector");
         String[] choice = {"yes", "no"};
@@ -41,6 +43,7 @@ public class Launcher {
         }
     }
 
+    // permet de choisir si l'on veut jouer au colorLines classique ou à la variante et lance jeu + interface graphique colorLines
     public void ColorLinesLaunch(int dimension) {
         JFrame frame = new JFrame("Game Type Selector");
         String[] choice = {"Classic Game", "Variation"};

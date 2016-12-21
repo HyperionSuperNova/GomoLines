@@ -24,8 +24,4 @@ public class JoueurColorLines extends Joueur{
         return pseudo;
     }
 
-    @Override
-    public String[] jouer() {
-        return new String[0];
-    }
 }

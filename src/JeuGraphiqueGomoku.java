@@ -57,7 +57,6 @@ public class JeuGraphiqueGomoku extends JeuGraphique {
             }
 
             if (p.isFull()) {
-                System.out.println("yolo");
             } else if (this.game.equals("robot")) {
                 majr();
             }

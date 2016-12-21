@@ -15,31 +15,20 @@ public class PlateauGomoku extends Plateau {
         this.initializeThePlate();
     }
 
-
+    // vérifie alignement peu importe le type d'alignement
     @Override
-    public boolean alignement(Case c) {          // vérifie alignement peu importe le type d'alignement
+    public boolean alignement(Case c) {
         return (alignementVertical(c) || alignementHorizontal(c) || alignementDiagonal2(c) || alignementDiagonal1(c));
     }
 
-    public void setCase(Case c) {  // peut etre a mettre dans case
-        for (int i = 0; i < cases.length; i++) {
-            for (Case b : cases[i]) {
-                if (c.x == b.x && c.y == b.y) b = c;
-            }
-        }
-    }
-
-    public Case[][] getCases() {
-        return cases;
-    }
-
-    public boolean alignementHorizontal(Case c) {                                                                   //verifie alignement horizontal
-        int cmp = 0;                                                                                                //  _____________________         //  |___|___|___|___|___|
-        int x = c.x;                                                                                                //  |___|___|___|___|___|
-        int y = c.y;                                                                                                //  |---|---|---|-> |___|
-        Case curseur;                                                                                               //  |___|___|___|___|___|
-        int j = 0;                                                                                                  //  |___|___|___|___|___|
-        int cmpF = 0;
+    //verifie si un alignement horizontal se crée
+    public boolean alignementHorizontal(Case c) {
+        int cmp = 0;                                                                                    //  _____________________
+        int cmpF =0;                                                                                    //  |___|___|___|___|___|
+        int x = c.x;                                                                                    //  |___|___|___|___|___|
+        int y = c.y;                                                                                    //  |---|---|---|-> |___|
+        Case curseur;                                                                                   //  |___|___|___|___|___|
+        int j = 0;                                                                                      //  |___|___|___|___|___|
         boolean b = false;
         while(j < cases[x].length){
             curseur = cases[x][j];
@@ -54,7 +43,6 @@ public class PlateauGomoku extends Plateau {
             }else cmp = 0;
             if(cmp >= 5 && b){
                 int i = curseur.y + 1 - cmp;
-                System.out.println("i: "+i+" curseur.y: "+curseur.y+" curseur.x: "+curseur.x);
                 while (cmp >= 0 && i < cases[x].length){
                     curseur = cases[x][i];
                     if(curseur.x == c.x && curseur.y == c.y) {
@@ -71,13 +59,14 @@ public class PlateauGomoku extends Plateau {
         return (cmp == 0 && cmpF >= 5 && c.passage);
     }
 
-    public boolean alignementVertical(Case c) {                                                                     //verifie alignement vertical
-        int cmp =0;                                                                                                 //  _____________________
-        boolean b = false;                                                                                          //  |___|___|___| | |___|
-        int x = c.x;                                                                                       //  |___|___|___| | |___|
-        int y = c.y;                                                                                       //  |___|___|___| | |___|
-        Case curseur = cases[0][y];                                                                                 //  |___|___|___| v |___|
-        int i = 0;                                                                                                  //  |___|___|___|___|___|
+    //verifie si un alignement vertical se crée
+    public boolean alignementVertical(Case c) {
+        int cmp =0;                                                                                     //  _____________________
+        boolean b = false;                                                                              //  |___|___|___| | |___|
+        int x = c.x;                                                                                    //  |___|___|___| | |___|
+        int y = c.y;                                                                                    //  |___|___|___| | |___|
+        Case curseur = cases[0][y];                                                                     //  |___|___|___| v |___|
+        int i = 0;                                                                                      //  |___|___|___|___|___|
         int cmpF = 0;
         while(i < cases[x].length){
             curseur = cases[i][y];
@@ -108,14 +97,15 @@ public class PlateauGomoku extends Plateau {
         return (cmp >= 5 && c.passage);
     }
 
-    public boolean alignementDiagonal1(Case c) {                                                                     // verifie alignement diagonal
-        int x = c.x;                                                                                       //  _____________________
-        int y = c.y;                                                                                       //  | \ |___|___|___|___|
-        int cmp = 0;                                                                                                //  |___| \ |___|___|___|
-        boolean b = false;                                                                                          //  |___|___| \ |___|___|
-        Case curseur = null;                                                                                        //  |___|___|___|_| |___|
-        int cmpF = 0;
-        while (x >= 0 && y >= 0) {                                                                                    //  |___|___|___|___|___|
+    //verifie si un alignement diagonal1 (cf petit schéma à droit) se crée
+    public boolean alignementDiagonal1(Case c) {
+        int x = c.x;                                                                                    //  _____________________
+        int y = c.y;                                                                                    //  | \ |___|___|___|___|
+        int cmp = 0;                                                                                    //  |___| \ |___|___|___|
+        boolean b = false;                                                                              //  |___|___| \ |___|___|
+        Case curseur = null;                                                                            //  |___|___|___|_| |___|
+        int cmpF = 0;                                                                                   //  |___|___|___|___|___|
+        while (x >= 0 && y >= 0) {
             curseur = cases[x][y];
             x -= 1;
             y -= 1;
@@ -154,14 +144,15 @@ public class PlateauGomoku extends Plateau {
         return (cmpF >= 5 && c.passage);
     }
 
-    public boolean alignementDiagonal2(Case c){                                                                     // verifie alignement autre diagonal
-        int x = c.x;                                                                                       //  _____________________
-        int y = c.y;                                                                                       //  |___|___|___|___| / |
-        int cmp = 0;                                                                                                //  |___|___|___| / |___|
-        boolean b = false;                                                                                          //  |___|___| / |___|___|
-        Case curseur = null;                                                                                        //  |___| L |___|___|___|
-       int cmpF = 0;
-        while(x < cases.length && y >= 0){                                                                          //  |___|___|___|___|___|
+    //verifie si un alignement diagonal2 (cf petit schéma à droite) se crée
+    public boolean alignementDiagonal2(Case c){
+        int x = c.x;                                                                                    //  _____________________
+        int y = c.y;                                                                                    //  |___|___|___|___| / |
+        int cmp = 0;                                                                                    //  |___|___|___| / |___|
+        boolean b = false;                                                                              //  |___|___| / |___|___|
+        Case curseur = null;                                                                            //  |___| L |___|___|___|
+       int cmpF = 0;                                                                                    //  |___|___|___|___|___|
+        while(x < cases.length && y >= 0){
             curseur = cases[x][y];
             x += 1;
             y -= 1;

@@ -46,20 +46,6 @@ public class PionColorLines extends Pion{
             return VALUES.get(new Random().nextInt(SIZE));
         }
     }
-
-    @Override
-    public void afficher() {
-        if(this.couleur.name().equals("ROUGE")){
-            System.out.print("R ");
-        }else if(this.couleur.name().equals("VERT")){
-            System.out.print("V ");
-        }else if (this.couleur.name().equals("BLEU")){
-            System.out.print("B ");
-        }else{
-            System.out.print("C ");
-        }
-    }
-
     public String toString(){
         return this.couleur.name().toLowerCase();
     }
