@@ -11,8 +11,8 @@ import java.awt.event.MouseMotionListener;
 /**
  * Created by merat on 15/12/16.
  */
-public abstract class JeuGraphique{
-    private static int turncounter = 0;
+public abstract class JeuGraphique {
+    protected static int turncounter = 0;
     protected static int[] tabsave = new int[2];
     Plateau p;
     Vue v;
@@ -28,9 +28,22 @@ public abstract class JeuGraphique{
         return p;
     }
 
+    public void endGame() {
+        try {
+            showScore();
+            v.dispose();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
     public abstract void maj(int x, int y);
+
     public abstract void jouer(String s);
+
     public abstract void turnShow();
+
     public abstract void showScore();
 
     public Vue getVue() {
@@ -40,9 +53,10 @@ public abstract class JeuGraphique{
     class Vue extends JFrame {
         private JPanel gui = new JPanel(new BorderLayout(0, 0));
         private JPanel plateau;
-        private JLabel message = new JLabel("Game is ready to play!");
+        private JLabel message = new JLabel("Click where you want to take your pawn");
         private JLabel score = new JLabel(" Score J1 " + 0);
         JToolBar tools = new JToolBar();
+
         public Vue() {
             gui.setBorder(new EmptyBorder(5, 5, 5, 5));
             tools.setFloatable(false);
@@ -59,7 +73,7 @@ public abstract class JeuGraphique{
                 for (int j = 0; j < p.getCases()[i].length; j++) {
                     p.cases[i][j] = p.new Case(i, j, null);
                     p.cases[i][j].setMargin(buttonMargin);
-                    p.cases[i][j].setPreferredSize(new Dimension(40,40));
+                    p.cases[i][j].setPreferredSize(new Dimension(40, 40));
                     if ((j % 2 == 1 && i % 2 == 1) || (j % 2 == 0 && i % 2 == 0)) {
                         p.cases[i][j].setBackground(Color.WHITE);
                     } else {
@@ -75,7 +89,7 @@ public abstract class JeuGraphique{
             this.setLocationByPlatform(true);
             this.pack();
             this.setMinimumSize(this.getSize());
-            this.setMaximumSize(new Dimension(1024,768));
+            this.setMaximumSize(new Dimension(1024, 768));
             this.setVisible(true);
         }
 
@@ -83,16 +97,16 @@ public abstract class JeuGraphique{
             return gui;
         }
 
-        public void setScore(String a){
+        public void setScore(String a) {
             score.setText(a);
         }
 
-        public void setMessage(String a){
+        public void setMessage(String a) {
             message.setText(a);
         }
     }
 
-    class Controleur implements ActionListener,MouseInputListener,MouseMotionListener {
+    class Controleur implements ActionListener, MouseInputListener, MouseMotionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -100,21 +114,20 @@ public abstract class JeuGraphique{
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            for(int i = 0; i < p.cases.length;i++){
-                for(int j = 0; j < p.cases[i].length;j++){
-                    if(e.getSource() == p.cases[i][j] && p instanceof PlateauGomoku){
-                        maj(i,j);
+            for (int i = 0; i < p.cases.length; i++) {
+                for (int j = 0; j < p.cases[i].length; j++) {
+                    if (e.getSource() == p.cases[i][j] && p instanceof PlateauGomoku) {
+                        maj(i, j);
                         turnShow();
-                    }else if(e.getSource() == p.cases[i][j] && p instanceof PlateauColorLines){
-                        if(turncounter % 2 == 0){
+                    } else if (e.getSource() == p.cases[i][j] && p instanceof PlateauColorLines) {
+                        if (turncounter % 2 == 0 && !p.cases[i][j].isEmpty()) {
                             tabsave[0] = i;
                             tabsave[1] = j;
-                            v.setMessage("Click on where you want to put your piece");
+                            v.setMessage("Click where you want to drop it");
                             turncounter++;
-                        }else{
-                            maj(i,j);
-                            v.setMessage("The piece has been dropped");
-                            turncounter ++;
+                        } else {
+                            maj(i, j);
+                            v.setMessage("Click where you want to take your pawn");
                         }
                     }
                 }

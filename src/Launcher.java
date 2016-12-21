@@ -10,28 +10,29 @@ public class Launcher {
         userExperience();
     }
 
-    private void userExperience(){
-        JFrame frame = new JFrame("Game Menu");
-        int dimension = Integer.parseInt(JOptionPane.showInputDialog(frame,"Welcome please enter the dimension of the board"));
-        String[] games = {"Gomoku","ColorLines"};
-        String s = (String) JOptionPane.showInputDialog(frame,"What game do you wanna Play","Games",JOptionPane.QUESTION_MESSAGE,null,games,games[0]);
-        if(s.equals("Gomoku")){
+    private void userExperience() {
+        JFrame frame = new JFrame("Game Choices");
+        int dimension = Integer.parseInt(JOptionPane.showInputDialog(frame, "Welcome please enter the dimension of the board"));
+        String[] games = {"Gomoku", "ColorLines"};
+        String s = (String) JOptionPane.showInputDialog(frame, "What game do you wanna Play", "Games", JOptionPane.QUESTION_MESSAGE, null, games, games[0]);
+        if (s.equals("Gomoku")) {
             GomokuLaunch(dimension);
-        }else{
+        } else {
             ColorLinesLaunch(dimension);
         }
     }
 
-    public void GomokuLaunch(int dimension){
-        JFrame frame = new JFrame("Game Choices");
-        String[] choice = {"yes","no"};
-        String res = (String) JOptionPane.showInputDialog(frame,"Do you wanna play with a robot ?","Choices",JOptionPane.QUESTION_MESSAGE,null,choice,choice[0]);
+    public void GomokuLaunch(int dimension) {
+        JFrame frame = new JFrame("Game Type Selector");
+        String[] choice = {"yes", "no"};
+        String res = (String) JOptionPane.showInputDialog(frame, "Do you wanna play with a robot ?", "Choices", JOptionPane.QUESTION_MESSAGE, null, choice, choice[0]);
         JeuGraphique j = null;
         if (res.equals("yes")) {
             res = JOptionPane.showInputDialog("What's your name ?");
             j = new JeuGraphiqueGomoku(new PlateauGomoku(dimension, new JoueurGomoku(res, "blanc", dimension), new JoueurGomoku("Robot", "noir", dimension)));
+            j.v.setTitle("1 Player Gomoku");
             j.jouer("robot");
-        }else{
+        } else {
             res = JOptionPane.showInputDialog("What's the name of the first player ?");
             String j2 = JOptionPane.showInputDialog("What's the name of the second player ?");
             j = new JeuGraphiqueGomoku(new PlateauGomoku(dimension, new JoueurGomoku(res, "blanc", dimension), new JoueurGomoku(j2, "noir", dimension)));
@@ -40,12 +41,26 @@ public class Launcher {
         }
     }
 
-    public void ColorLinesLaunch(int dimension){
-        JeuGraphique j = new JeuGraphiqueColorLines(new PlateauColorLines(dimension, new JoueurColorLines("Nabil")));
+    public void ColorLinesLaunch(int dimension) {
+        JFrame frame = new JFrame("Game Type Selector");
+        String[] choice = {"Classic Game", "Variation"};
+        String res = (String) JOptionPane.showInputDialog(frame, "Choose your game type ?", "Choices", JOptionPane.QUESTION_MESSAGE, null, choice, choice[0]);
+        if (res.equals("Classic Game")) {
+            res = JOptionPane.showInputDialog("What's your name ?");
+            JeuGraphique j = new JeuGraphiqueColorLines(new PlateauColorLines(dimension, new JoueurColorLines(res)));
+            j.v.setTitle("Color Lines Classique");
+            j.jouer("classique");
+        } else {
+            res = JOptionPane.showInputDialog("What's your name ?");
+            JeuGraphique j = new JeuGraphiqueColorLines(new PlateauColorLines(dimension, new JoueurColorLines(res)));
+            j.v.setTitle("Color Lines Variante");
+            j.jouer("variante");
+        }
+
 
     }
 
-    public static void main(String [] args) {
+    public static void main(String[] args) {
         Runnable r = new Runnable() {
 
             @Override
